@@ -1,8 +1,8 @@
 from flask import Blueprint, request, render_template
 
-vaga = Blueprint('vaga', __name__, url_prefix="/admin",
+login = Blueprint('login', __name__, url_prefix="/",
                   template_folder='../view')
 
-@vaga.route("/vaga")
+@login.route("/login")
 def index():
-    return "vaga"
+    return "login"
