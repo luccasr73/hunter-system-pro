@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Hunter System Pro - Criar conta</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/datepicker.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <body class="">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Hunter System Pro</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="vagas.html">Vagas <span class="sr-only">(current)</span></a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav mr-left">
+                    <li class="nav-item active">
+                        <a class="btn btn-primary" href="cadastro.html">Criar conta</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="btn btn-primary ml-lg-2" href="login.html">Entrar</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+        <div class="container mt-5 mb-5">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>Crie sua conta</h1>
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <h4>Dados pessoais</h4>
+                                    </div>
+                                    <div class="col-12 col-lg-8">
+                                        <label for="name">Nome completo</label>
+                                        <input type="text" class="form-control name" id="name" placeholder="Digite seu nome">
+                                    </div>
+                                    <div class="col-12 col-lg-2">
+                                        <label for="cpf">CPF</label>
+                                        <input type="text" class="form-control cpf" id="cpf" placeholder="Digite aqui seu CPF">
+                                    </div>
+                                    <div class="col-12 col-lg-2">
+                                        <label for="birth-date">Data de nascimento</label>
+                                        <input class="form-control birth-date" id="birth-date" data-toggle="datepicker">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-12 col-lg-2">
+                                        <label for="state">Estado Civil</label>
+                                        <select class="custom-select">
+                                            <option selected disabled>Selecione uma opção</option>
+                                            <option value="1">Solteiro(a)</option>
+                                            <option value="2">Casado(a)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <h4>Contato</h4>
+                                    </div>
+                                    <div class="col-12 col-lg-3">
+                                        <label for="celphone">Celular</label>
+                                        <input type="text" class="form-control phone" id="celphone" placeholder="">
+                                    </div>
+                                    <div class="col-12 col-lg-3">
+                                        <label for="phone">Telefone para recados</label>
+                                        <input type="text" class="form-control phone" id="phone" placeholder="">
+                                    </div>
+
+                                    <div class="col-12 col-lg-3">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control email" id="email" placeholder="ex: seuemail@email.com">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <h4>Endereço</h4>
+                                    </div>
+                                    <div class="col-12 col-lg-2">
+                                        <label for="cep">CEP</label>
+                                        <input type="text" class="form-control cep" id="cep" placeholder="">
+                                    </div>
+                                    <div class="col-12 col-lg-5">
+                                        <label for="logradouro">Logradouro</label>
+                                        <input type="text" class="form-control logradouro" id="logradouro" disabled>
+                                    </div>
+                                    <div class="col-12 col-lg-2">
+                                        <label for="numero">Numero</label>
+                                        <input type="tel" class="form-control numero" id="numero" placeholder="Digite aqui no numero">
+                                    </div>
+                                    <div class="col-12 col-lg-3">
+                                        <label for="cidade">Cidade</label>
+                                        <input type="text" class="form-control cidade" id="cidade" placeholder="Cidade" disabled>
+                                    </div>
+                                    <div class="col-12 col-lg-3">
+                                        <label for="bairro">Bairro</label>
+                                        <input type="text" class="form-control bairro" id="bairro" placeholder="Bairro" disabled>
+                                    </div>
+                                    <div class="col-12 col-lg-1">
+                                        <label for="uf">UF</label>
+                                        <input type="text" class="form-control uf" id="uf" placeholder="UF" disabled>
+                                    </div>
+
+                                    <div class="col-12 col-lg-5">
+                                        <label for="complemento">Complemento</label>
+                                        <input type="text" class="form-control complemento" id="complemento" placeholder="ex: Apartamento 108 terceiro andar">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <h4>Dados academicos</h4>
+                                    </div>
+                                    <div class="academic-data-group col-12" data-id="1">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-5">
+                                                <label for="course">Curso</label>
+                                                <input type="text" class="form-control course" id="course" placeholder="ex: Sistemas de informação">
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <label for="institution">Instituição</label>
+                                                <input type="text" class="form-control institution" id="institution" placeholder="ex: Faculdade Impacta">
+                                            </div>
+                                            <div class="col-12 col-lg-2">
+                                                <label for="level">Nivel</label>
+                                                <select class="custom-select level" id="level">
+                                                    <option selected disabled>Selecione uma opção</option>
+                                                    <option value="1">Superior</option>
+                                                    <option value="2">Tecnico</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-lg-2">
+                                                <label for="conclusion">Conclusão</label>
+                                                <input class="form-control conclusion" id="conclusion">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3 text-right">
+                                    <button type="button" class="btn btn-secondary add-more-courses">Adicionar outro curso</button>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <h4>Experiências</h4>
+                                    </div>
+                                </div>
+                                <div class="experiencias-anteriores" data-experiencias-anteriores-id="1">
+                                    <div class="form-group row">
+                                        <div class="col-12 col-lg-6">
+                                            <label for="exampleFormControlInput1">Empresa</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <label for="exampleFormControlInput1">Cargo</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12 col-lg-3">
+                                            <label for="entrydate">Data de entrada</label>
+                                            <input type="text" class="form-control entrydate" id="entrydate">
+                                        </div>
+                                        <div class="col-12 col-lg-3">
+                                            <label for="exitdate">Data de saida</label>
+                                            <input type="text" class="form-control exitdate" id="exitdate">
+                                        </div>
+                                        <div class="col-12 col-lg-12 mt-3">
+                                            <label for="responsibilities">Descrevar um pouco suas responsabilidades no cargo</label>
+                                            <textarea class="form-control" id="responsibilities" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <h4>Conhecimento em idiomas</h4>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <label for="exampleFormControlInput1">Idioma</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <label for="exampleFormControlInput1">Nivel</label>
+                                        <input type="text" class="form-control js-choice" id="exampleFormControlInput1" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 text-right">
+                                        <button type="button" class="btn btn-success">Criar conta</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="js/jquery.mask.min.js"></script>
+        <script src="js/datepicker.min.js"></script>
+        <script src="js/datepicker.pt-BR.js"></script>
+        <script>
+            $('.birth-date').datepicker({
+                language: 'pt-BR',
+                format: 'dd/mm/yyyy'
+            })
+            $('.conclusion').datepicker({
+                language: 'pt-BR',
+                format: 'mm/yyyy'
+            })
+            var spMaskBehavior = function (val) {
+                    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009'
+                },
+                spOptions = {
+                    onKeyPress: function (val, e, field, options) {
+                        field.mask(spMaskBehavior.apply({}, arguments), options)
+                    },
+                    placeholder: '(__) ____-____'
+                }
+            $('.cpf').mask('000.000.000-00', {
+                placeholder: '___.___.___-__'
+            })
+            $('.celphone').mask(spMaskBehavior, spOptions)
+            $('.phone').mask(spMaskBehavior, spOptions)
+            $('.birth-date').mask('00/00/0000', {
+                placeholder: '__/__/____'
+            })
+            $('.conclusion').mask('00/0000', {
+                placeholder: '__/____'
+            })
+            $('.cep').mask('00000-000', {
+                placeholder: '_____-___'
+            })
+
+            function limpaDadosEndereco() {
+                $('.logradouro').val('')
+                $('.bairro').val('')
+                $('.cidade').val('')
+                $('.uf').val('')
+            }
+
+
+            $('.cep').blur(function () {
+                var cep = $(this).val().replace(/\D/g, '')
+                if (cep != '') {
+                    var validacep = /^[0-9]{8}$/
+                    if (validacep.test(cep)) {
+                        $('.logradouro').val('Procurando...')
+                        $('.bairro').val('Procurando...')
+                        $('.cidade').val('Procurando...')
+                        $('.uf').val('Procurando...')
+
+                        $.getJSON('https://viacep.com.br/ws/' + cep + '/json/?callback=?', function (dados) {
+
+                            if (!('erro' in dados)) {
+                                $('.logradouro').val(dados.logradouro)
+                                $('.bairro').val(dados.bairro)
+                                $('.cidade').val(dados.localidade)
+                                $('.uf').val(dados.uf)
+                            } else {
+                                limpaDadosEndereco()
+                                alert('CEP não encontrado.')
+                            }
+                        })
+                    } else {
+                        limpaDadosEndereco()
+                        alert('Formato de CEP inválido.')
+                    }
+                } else {
+                    limpaDadosEndereco()
+                }
+            })
+
+            function addAcademicGroup() {
+                let elm = $('.academic-data-group').last()
+                let currentId = parseInt(elm.attr('data-id'))
+                let template = `
+                <div class="academic-data-group col-12 mt-3" data-id="${currentId+1}">
+                    <div class="row">
+                        <div class="col-12 col-lg-5">
+                            <label for="course${currentId+1}">Curso</label>
+                            <input type="text" class="form-control course" id="course${currentId+1}" placeholder="ex: Sistemas de informação">
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <label for="institution${currentId+1}">Instituição</label>
+                            <input type="text" class="form-control institution" id="institution${currentId+1}" placeholder="ex: Faculdade Impacta">
+                        </div>
+                        <div class="col-12 col-lg-2">
+                            <label for="level${currentId+1}">Nivel</label>
+                            <select class="custom-select level" id="level${currentId+1}">
+                                <option selected disabled>Selecione uma opção</option>
+                                <option value="1">Superior</option>
+                                <option value="2">Tecnico</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-lg-2 ">
+                            <label for="conclusion${currentId+1}">Conclusão</label>
+                            <input class="form-control conclusion" id="conclusion${currentId+1}">
+                        </div>
+                        <div class="col-12 col-lg-2">
+                            <span class="remove-course-line text-danger mouse-pointer">Remover</span>
+                        </div>
+                    </div>
+                </div>`
+                elm.after(template)
+                $('.conclusion').mask('00/0000', {
+                    placeholder: '__/____'
+                })
+                $('.conclusion').datepicker({
+                    language: 'pt-BR',
+                    format: 'mm/yyyy'
+                })
+            }
+
+            function removeAcademicGroup(elm) {
+                elm.parents('.academic-data-group').remove()
+            }
+            //addAcademicGroup()
+
+            $('.add-more-courses').on('click', () => {
+                addAcademicGroup()
+            })
+            $(document).on('click', '.remove-course-line', (e) => {
+                removeAcademicGroup($(e.currentTarget))
+            })
+        </script>
+    </body>
+
+</html>
