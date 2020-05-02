@@ -149,44 +149,59 @@
                                                 <label for="conclusion">Conclusão</label>
                                                 <input class="form-control conclusion" id="conclusion">
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 mt-3 text-right">
-                                    <button type="button" class="btn btn-secondary add-more-courses">Adicionar outro curso</button>
+                                <div class=" mt-3 text-right">
+                                    <button type="button" class="btn btn-secondary add-more-courses"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-12">
                                         <h4>Experiências</h4>
                                     </div>
                                 </div>
-                                <div class="experiencias-anteriores" data-experiencias-anteriores-id="1">
-                                    <div class="form-group row">
-                                        <div class="col-12 col-lg-6">
-                                            <label for="exampleFormControlInput1">Empresa</label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                <div class="wrapper-experiencias">
+                                    <div class="experiencias" data-experiencia-id="1">
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <h6>Experiência</h6>
+                                            </div>
                                         </div>
-                                        <div class="col-12 col-lg-6">
-                                            <label for="exampleFormControlInput1">Cargo</label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                        <div class="form-group row">
+                                            <div class="col-12 col-lg-6">
+                                                <label for="empresa">Empresa</label>
+                                                <input type="text" class="form-control empresa" id="empresa" placeholder="">
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <label for="cargo">Cargo</label>
+                                                <input type="text" class="form-control cargo" id="cargo" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <div class="col-12 col-lg-3">
+                                                <label for="data-entrada">Data de entrada</label>
+                                                <input type="text" class="form-control data-entrada" id="data-entrada">
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <label for="data-saida">Data de saida</label>
+                                                <input type="text" class="form-control data-saida" id="data-saida">
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <label>&nbsp;</label>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input tabalho-atual" id="tabalho-atual">
+                                                    <label class="custom-control-label" for="tabalho-atual">Trabalho atual</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-12 mt-3">
+                                                <label for="resposabilidades">Descrevar suas responsabilidades no cargo(Opcional)</label>
+                                                <textarea class="form-control" id="resposabilidades" rows="3"></textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-12 col-lg-3">
-                                            <label for="entrydate">Data de entrada</label>
-                                            <input type="text" class="form-control entrydate" id="entrydate">
-                                        </div>
-                                        <div class="col-12 col-lg-3">
-                                            <label for="exitdate">Data de saida</label>
-                                            <input type="text" class="form-control exitdate" id="exitdate">
-                                        </div>
-                                        <div class="col-12 col-lg-12 mt-3">
-                                            <label for="responsibilities">Descrevar um pouco suas responsabilidades no cargo</label>
-                                            <textarea class="form-control" id="responsibilities" rows="3"></textarea>
-                                        </div>
-                                    </div>
+                                </div>
+                                <div class=" mt-3 text-right">
+                                    <button type="button" class="btn btn-secondary add-experiencia"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-12">
@@ -205,7 +220,6 @@
                                     <div class="col-12 text-right">
                                         <button type="button" class="btn btn-success">Criar conta</button>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
@@ -219,6 +233,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
         <script src="{{ url_for('static', filename='js/jquery.mask.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/datepicker.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/datepicker.pt-BR.js') }}"></script>
@@ -294,8 +309,8 @@
                 }
             })
 
-            function addAcademicGroup() {
-                let elm = $('.academic-data-group').last()
+            function addAcademicGroup(elm) {
+                elm = $(elm).last()
                 let currentId = parseInt(elm.attr('data-id'))
                 let template = `
                 <div class="academic-data-group col-12 mt-3" data-id="${currentId+1}">
@@ -335,13 +350,82 @@
                 })
             }
 
+            function addExperienciaProfissional(elm) {
+                elm = $(elm)
+                console.log(elm)
+                let currentId = parseInt(elm.find('.experiencias').last().attr('data-experiencia-id'))
+                console.log(currentId)
+                currentId++
+                let template = `
+                <div class="experiencias" data-experiencia-id="${currentId}">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <h6>Experiência</h6>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12 col-lg-6">
+                            <label for="empresa${currentId}">Empresa</label>
+                            <input type="text" class="form-control empresa" id="empresa${currentId}" placeholder="">
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label for="cargo${currentId}">Cargo</label>
+                            <input type="text" class="form-control cargo" id="cargo${currentId}" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <div class="col-12 col-lg-3">
+                            <label for="data-entrada${currentId}">Data de entrada</label>
+                            <input type="text" class="form-control data-entrada" id="data-entrada${currentId}">
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <label for="data-saida${currentId}">Data de saida</label>
+                            <input type="text" class="form-control data-saida" id="data-saida${currentId}">
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <label>&nbsp;</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input tabalho-atual" id="tabalho-atual${currentId}">
+                                <label class="custom-control-label" for="tabalho-atual${currentId}">Trabalho atual</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12 mt-3">
+                            <label for="resposabilidades${currentId}">Descrevar suas responsabilidades no cargo(Opcional)</label>
+                            <textarea class="form-control" id="resposabilidades${currentId}" rows="3"></textarea>
+                        </div>
+                        <div class="col-12 col-lg-2">
+                            <span class="remover-experiencia text-danger mouse-pointer">Remover</span>
+                        </div>
+                    </div>
+                </div>`
+                elm.append(template)
+                $('.conclusion').mask('00/0000', {
+                    placeholder: '__/____'
+                })
+                $('.conclusion').datepicker({
+                    language: 'pt-BR',
+                    format: 'mm/yyyy'
+                })
+            }
+
             function removeAcademicGroup(elm) {
                 elm.parents('.academic-data-group').remove()
             }
-            //addAcademicGroup()
+
+            function removerExperiencia(elm) {
+                elm.parents('.experiencias').remove()
+            }
+
+            $('.add-experiencia').on('click', () => {
+                addExperienciaProfissional('.wrapper-experiencias')
+            })
 
             $('.add-more-courses').on('click', () => {
-                addAcademicGroup()
+                addAcademicGroup('.academic-data-group')
+            })
+
+            $(document).on('click', '.remover-experiencia', (e) => {
+                removerExperiencia($(e.currentTarget))
             })
             $(document).on('click', '.remove-course-line', (e) => {
                 removeAcademicGroup($(e.currentTarget))
