@@ -4,11 +4,5 @@ cadastro = Blueprint('cadastro', __name__, url_prefix="/",
 
 @cadastro.route("/cadastro")
 def index():
-    tipo = request.args.get('tipo')
-    print(tipo)
-    if tipo == 'candidato':
-        return render_template('cadastro.html')
-    if tipo == 'admin':
-        return 'admin'
-    if tipo != 'admin' or tipo != 'candidato':
-        return redirect(url_for('home.index'))
+    return render_template('cadastro.html')
+
