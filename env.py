@@ -5,10 +5,28 @@ from dotenv import load_dotenv
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-MODE = os.environ.get('MODE')
-MYSQL_CON = ''
-if MODE == 'PROD':
-    MYSQL_CON = os.environ.get('PROD_MYSQL_CON_URL')
 
-if MODE == 'DEV':
-    MYSQL_CON = os.environ.get('DEV_MYSQL_CON_URL')
+class Config:
+    MODE = os.environ.get('MODE')
+    DB_HOST = ''
+    DB_PORT= ''
+    DB_DBNAME = ''
+    DB_USER= ''
+    DB_PASS = ''
+    DB_TYPE= ''
+    DB_CONECTOR = ''
+    if MODE == 'PROD':
+        DB_PORT= ''
+        DB_DBNAME = ''
+        DB_USER= ''
+        DB_PASS = ''
+        DB_TYPE= ''
+        DB_CONECTOR = ''
+
+    if MODE == 'DEV':
+        DB_PORT= ''
+        DB_DBNAME = ''
+        DB_USER= ''
+        DB_PASS = ''
+        DB_TYPE= ''
+        DB_CONECTOR = ''
