@@ -1,0 +1,21 @@
+exports.up = function (knex) {
+  return knex.schema.createTable('candidato', function (table) {
+    table.engine('INNODB')
+    table.increments().primary()
+    table.integer('id_login').unsigned().notNullable()
+      .references('id').inTable('login')
+    table.string('nome').notNullable()
+    table.date('data_nasc').notNullable()
+    table.string('cpf').notNullable().unique()
+    table.string('estado_civil').notNullable()
+    table.string('email').notNullable().unique()
+    // table.timestamp('criado').defaultTo(knex.fn.now())
+    // table.timestamp('atualizado').defaultTo(knex.fn.now())
+  }).then(() => {
+    console.log('tabela candidato criada')
+  })
+}
+
+exports.down = function (knex) {
+  return knex.schema.dropTable('candidato')
+}
