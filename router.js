@@ -1,7 +1,7 @@
-const index = require('./routes/index')
+const comum = require('./routes/comum')
 // const usersRouter = require('./routes/users')
-const cadastro = require('./routes/cadastro')
+const candidato = require('./routes/candidato')
 module.exports = {
-  index,
-  cadastro
+  comum,
+  candidato
 }
