@@ -7,9 +7,8 @@ const Telefone = require('../models/telefone')
 /* GET home page. */
 
 router.get('/candidato', function (req, res, next) {
-  res.render('cadastro', {
-    title: 'teste'
-  })
+  console.log(req.user)
+  res.render('cadastro')
 })
 
 router.post('/candidato', async function (req, res, next) {
