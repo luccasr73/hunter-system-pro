@@ -1,75 +1,59 @@
 const express = require('express')
 const router = express.Router()
-const knex = require('../db/knex')
 const Login = require('../models/login')
-const Candidato = require('../models/candidato')
-const Telefone = require('../models/telefone')
+// const { passport } = require('../services/autenticacao')
 /* GET home page. */
 
 router.get('/cadastrar', function (req, res, next) {
-  res.render('cadastro')
+  console.log(res.locals.flash)
+  // res.locals.flash.message.forEach(e => {
+  //   console.log(e)
+  // })
+  // console.log('aaaa')
+  // res.send('')
+  return res.render('cadastro', {
+    tituloPagina: 'Criar conta',
+    erros: res.locals.flash.message.erros,
+    form: res.locals.flash.message.form
+  })
+})
+
+router.get('/curriculo', function (req, res, next) {
+  console.log(req.user)
+  res.send('')
 })
 
 router.post('/cadastrar', async function (req, res, next) {
   const tipo = 'candidato'
-  let data = req.body
-  const trx = await knex.transaction()
+  const data = req.body
+  const erros = Login.validar(data)
+  if (erros !== true) {
+    req.session.flash = {
+      type: 'info',
+      message: { form: data, erros }
+    }
+    return res.redirect('/candidato/cadastrar')
+  }
+
   try {
     const login = new Login({
       usuario: data.usuario,
       senha: data.senha,
       tipo
     })
-    await login.criar(trx)
-    const candidato = new Candidato({
-      nome: data.nome,
-      email: data.email,
-      cpf: data.cpf,
-      dataNascimento: data['data-nascimento'],
-      estadoCivil: data['estado-civil'],
-      idLogin: login.getId()
-    })
-    await candidato.criar(trx)
-    const celular = new Telefone({
-      idCandidato: candidato.getId(),
-      numero: data.celular,
-      tipo: 1
-    })
-    await celular.criar(trx)
-    if (data['telefone-recado']) {
-      const telefoneRecado = new Telefone({
-        idCandidato: candidato.getId(),
-        numero: data['telefone-recado'],
-        tipo: 1
-      })
-      await telefoneRecado.criar(trx)
-    }
-    await trx.commit()
-    data = { idLogin: login.getId() }
-    req.login(data, function (err) {
+    await login.criar()
+    const user = { usuario: data.usuario, senha: data.senha }
+    req.login(user, function (err) {
+      console.log(user)
       if (err) {
-        console.log(err)
+        return next(err)
       }
-      return res.redirect('/curriculo')
+      return res.redirect(301, '/candidato/curriculo')
     })
   } catch (error) {
-    await trx.rollback()
     console.log(error)
     res.json(error)
   }
-})
-
-router.post('/validar', function (req, res, next) {
-  const tipo = 'candidato'
-  const login = new Login(req.body.usuario, req.body.senha, tipo)
-  login.criar().then(e => {
-    // res.send(JSON.stringify(req.body))
-    res.json(e)
-  })
-    .catch(err => {
-      console.log(err)
-      res.json(err)
-    })
 })
 
 module.exports = router
