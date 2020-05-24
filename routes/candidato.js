@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Login = require('../models/login')
-const { passport } = require('../services/autenticacao')
+const { usuarioEstaLogado, usuarioNaoEstaLogado } = require('../services/autenticacao')
 /* GET home page. */
 
-router.get('/cadastrar', function (req, res, next) {
+router.get('/cadastrar', usuarioNaoEstaLogado(), function (req, res, next) {
   // console.log(res.locals.flash)
   // res.locals.flash.message.forEach(e => {
   //   console.log(e)
@@ -16,11 +16,13 @@ router.get('/cadastrar', function (req, res, next) {
   })
 })
 
-router.get('/curriculo', function (req, res, next) {
+router.get('/curriculo', usuarioEstaLogado(), function (req, res, next) {
   console.log(req.user)
   console.log(req.isAuthenticated())
   console.log(req.session)
-  res.send('aaaaaa')
+  res.render('curriculo', {
+    tituloPagina: 'Curriculo'
+  })
 })
 
 router.post('/cadastrar', async function (req, res, next) {
