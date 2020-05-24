@@ -7,16 +7,30 @@ function compararSenha (senha, hash) {
   return bcrypt.compare(senha, hash)
 }
 
-passport.serializeUser((id, done) => {
-  done(null, id)
+passport.serializeUser((usuario, done) => {
+  // console.log('serialize')
+  // console.log('log deserialize user', usuario)
+  Login.buscarPorUsuario(usuario.usuario)
+    .then((usuario) => {
+      // console.log('log serialize user', usuario)
+      done(null, usuario.id)
+    })
+    .catch((err) => {
+      // console.log('log deserialize err', err)
+      done(err, null)
+    })
 })
 
 passport.deserializeUser((id, done) => {
+  // console.log('deserialize')
+  // console.log('log deserialize user', id)
   Login.buscarPorId(id)
-    .then((user) => {
-      done(null, user)
+    .then((usuario) => {
+      // console.log('log deserialize user', usuario)
+      done(null, { id: usuario.id, tipo: usuario.tipo })
     })
     .catch((err) => {
+      // console.log('log deserialize err', err)
       done(err, null)
     })
 })
