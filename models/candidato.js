@@ -1,5 +1,5 @@
 const knex = require('../db/knex')
-
+const Joi = require('joi')
 class Candidato {
   constructor (data) {
     this.nome = data.nome
