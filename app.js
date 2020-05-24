@@ -8,7 +8,6 @@ const MySQLStore = require('express-mysql-session')(session)
 const passport = require('passport')
 const rotas = require('./router')
 const mysql = require('mysql')
-// var flash = require('express-flash-2')
 const app = express()
 const config = require('./env')
 const MySQLStoreEnv = require('./utils/MySQLStoreEnv')
@@ -20,8 +19,8 @@ app.use(express.urlencoded({
 const connection = mysql.createConnection(MySQLStoreEnv)
 app.use(session({
   secret: config.SECRET_KEY,
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   store: new MySQLStore({}, connection),
   // store: new session.MemoryStore(),
   cookie: {
@@ -30,7 +29,9 @@ app.use(session({
     // httpOnly: true
   }
 }))
-// app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
+
 // ref :https://gist.github.com/brianmacarthur/a4e3e0093d368aa8e423
 app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
@@ -38,13 +39,11 @@ app.use(function (req, res, next) {
   delete req.session.flash
   next()
 })
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(logger('tiny'))
-
-app.use(passport.initialize())
-app.use(passport.session())
 
 app.use('/', rotas.comum)
 app.use('/candidato', rotas.candidato)
