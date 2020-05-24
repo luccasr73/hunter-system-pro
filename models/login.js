@@ -12,27 +12,22 @@ class Login {
     this.id = id
   }
 
-  static criar (usuario, senha, tipo, transaction = null) {
-    if (this.id != null) {
-      return 'err'
-    }
+  static async criar (usuario, senha, tipo) {
     const salt = bcrypt.genSaltSync()
     const hash = bcrypt.hashSync(senha, salt)
-    if (transaction) {
-      return knex('login')
-        .transacting(transaction)
+    if (tipo === 'candidato') {
+      const trxProvider = knex.transactionProvider()
+      const trx = await trxProvider()
+      const idLogin = await trx('login')
         .insert({
           usuario: usuario,
           senha: hash,
           tipo: tipo
         }).returning('*')
+      await trx('candidato').insert({ id_login: idLogin[0] }).returning('*')
+      await trx.commit()
+      return trx.isCompleted()
     }
-    return knex('login')
-      .insert({
-        usuario: usuario,
-        senha: hash,
-        tipo: tipo
-      }).returning('*')
   }
 
   static buscarPorUsuario (usuario) {
