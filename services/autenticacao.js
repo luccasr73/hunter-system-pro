@@ -12,10 +12,7 @@ passport.serializeUser((id, done) => {
 })
 
 passport.deserializeUser((id, done) => {
-  const login = new Login({
-    id: id
-  })
-  login.buscarPorId()
+  Login.buscarPorId(id)
     .then((user) => {
       done(null, user)
     })
@@ -28,13 +25,8 @@ passport.use('login', new LocalStrategy({
   usernameField: 'usuario',
   passwordField: 'senha'
 }, async (usuario, senha, done) => {
-  console.log(usuario)
-  console.log(senha)
   try {
-    const login = new Login({
-      usuario: usuario
-    })
-    usuario = await login.buscarPorUsuario()
+    usuario = await Login.buscarPorUsuario(usuario)
     if (!usuario) {
       console.log('usuario n existe')
       return done(null, false, { message: 'Usuario incorreto' })
@@ -58,6 +50,7 @@ const authenticationMiddleware = () => {
     res.redirect('/index')
   }
 }
+
 module.exports = {
   authenticationMiddleware,
   passport
