@@ -56,16 +56,26 @@ passport.use('login', new LocalStrategy({
   }
 }))
 
-const authenticationMiddleware = () => {
+const usuarioEstaLogado = () => {
   return function (req, res, next) {
     if (req.isAuthenticated()) {
       return next()
     }
-    res.redirect('/index')
+    res.redirect('/login')
+  }
+}
+
+const usuarioNaoEstaLogado = () => {
+  return function (req, res, next) {
+    if (!req.isAuthenticated()) {
+      return next()
+    }
+    res.redirect('/')
   }
 }
 
 module.exports = {
-  authenticationMiddleware,
+  usuarioEstaLogado,
+  usuarioNaoEstaLogado,
   passport
 }
