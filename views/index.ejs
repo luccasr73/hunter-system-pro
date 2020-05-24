@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    <%- include('comum/head', {tituloPagina}) %>
+    <body>
+        <div class="article-clean">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <%- include('comum/navbar') %>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-xl-10 offset-lg-1 offset-xl-1">
+                    <div class="intro">
+                        <h1 class="text-center display-2">Quem somos</h1>
+                    </div>
+                    <div class="text">
+                        <p class="text-center">Fundada em 2010, a Search Serviços Empresariais iniciou suas atividades oferecendo serviços de consultoria em recrutamento e seleção, em um escritório localizado no bairro da Vila Madalena, São Paulo. É uma empresa de pequeno porte,
+                            com 6 funcionários e o número de clientes varia muito, pois trabalha por projetos geralmente curtos de no máximo 3 meses (por vaga).</p>
+                        <p class="text-center">Desde então, vem atendendo clientes de grande porte, tais como: Grupo Votorantim, Dow Chemical, Louis Dreyfuss, International Paper, entre outras, avaliando e apresentando profissionais qualificados para vagas em diversas áreas, como:
+                            financeira, administrativa, recursos humanos, jurídica, comercial, marketing, logística, etc.</p>
+                        <img src="/images/headhunter-traducao-significado.jpg" class="img-fluid">
+                        <p class="text-center">A partir de 2018, a empresa por contingências de mercado, passou a concentrar mais sua atuação no segmento de Tecnologia da Informação, uma vez que tem crescido exponencialmente a procura de profissionais nessa área.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="footer-basic bg-white">
+            <footer>
+                <div class="text-center social"><a href="#" style="background-color: rgba(203,108,230,0);"><i class="icon ion-social-instagram" style="background-color: rgba(203,108,230,0);"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+                <p class="copyright">SEARCH HEADHUNTER © 2010</p>
+            </footer>
+        </div>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    </body>
+
 </html>

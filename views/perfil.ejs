@@ -1,436 +1,171 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
-    <head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Documento de Luccas</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Hunter System Pro - Criar conta</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/datepicker.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-    </head>
-
-    <body class="">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Hunter System Pro</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="vagas.html">Vagas <span class="sr-only">(current)</span></a>
-                    </li>
-
+<body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+        <div class="container"><a class="navbar-brand" href="home.html">&nbsp;<img src="images/SearchLogo2.png" style="height: 72px;"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
                 </ul>
-                <ul class="navbar-nav mr-left">
-                    <li class="nav-item active">
-                        <a class="btn btn-primary" href="cadastro.html">Criar conta</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="btn btn-primary ml-lg-2" href="login.html">Entrar</a>
-                    </li>
-                </ul>
-
+                <form class="form-inline mr-auto" target="_self">
+                    <div class="form-group"><label for="search-field"></label></div>
+                </form><a class="text-dark ml-auto" href="Vagas.html" style="color: rgb(0,0,0);font-size: 17px;font-family: Lora, serif;width: 82px;">Vagas</a><a href="Cadastro.html" style="width: 89px;color: rgb(0,0,0);">Cadastro</a><button class="btn active action-button"
+                    type="button" style="color: #cb6ce6;">Login</button></div>
+        </div>
+    </nav>
+    <div class="footer-basic" style="background-color: #ffffff;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 text-center d-flex d-xl-flex justify-content-center justify-content-xl-center"><img class="img-fluid" src="images/minibus.jpeg"></div>
             </div>
-        </nav>
-        <div class="container mt-5 mb-5">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1>Crie sua conta</h1>
-                            <form>
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <h4>Dados pessoais</h4>
-                                    </div>
-                                    <div class="col-12 col-lg-8">
-                                        <label for="name">Nome completo</label>
-                                        <input type="text" class="form-control name" id="name" placeholder="Digite seu nome">
-                                    </div>
-                                    <div class="col-12 col-lg-2">
-                                        <label for="cpf">CPF</label>
-                                        <input type="text" class="form-control cpf" id="cpf" placeholder="Digite aqui seu CPF">
-                                    </div>
-                                    <div class="col-12 col-lg-2">
-                                        <label for="birth-date">Data de nascimento</label>
-                                        <input class="form-control birth-date" id="birth-date" data-toggle="datepicker">
-                                    </div>
+            <div class="row">
+                <div class="col text-center">
+                    <h2>Nome do individuo</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4">
+                    <div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <h4>Dados Pessoais edit&nbsp;</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div><label>Estado civil</label>
+                                    <p>Paragraph</p>
                                 </div>
-                                <div class="form-group row">
-
-                                    <div class="col-12 col-lg-2">
-                                        <label for="state">Estado Civil</label>
-                                        <select class="custom-select">
-                                            <option selected disabled>Selecione uma opção</option>
-                                            <option value="1">Solteiro(a)</option>
-                                            <option value="2">Casado(a)</option>
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div><label>Data de nascimento</label>
+                                    <p>Paragraph</p>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <h4>Contato</h4>
-                                    </div>
-                                    <div class="col-12 col-lg-3">
-                                        <label for="celphone">Celular</label>
-                                        <input type="text" class="form-control phone" id="celphone" placeholder="">
-                                    </div>
-                                    <div class="col-12 col-lg-3">
-                                        <label for="phone">Telefone para recados</label>
-                                        <input type="text" class="form-control phone" id="phone" placeholder="">
-                                    </div>
-
-                                    <div class="col-12 col-lg-3">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control email" id="email" placeholder="ex: seuemail@email.com">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <h4>Endereço</h4>
-                                    </div>
-                                    <div class="col-12 col-lg-2">
-                                        <label for="cep">CEP</label>
-                                        <input type="text" class="form-control cep" id="cep" placeholder="">
-                                    </div>
-                                    <div class="col-12 col-lg-5">
-                                        <label for="logradouro">Logradouro</label>
-                                        <input type="text" class="form-control logradouro" id="logradouro" disabled>
-                                    </div>
-                                    <div class="col-12 col-lg-2">
-                                        <label for="numero">Numero</label>
-                                        <input type="tel" class="form-control numero" id="numero" placeholder="Digite aqui no numero">
-                                    </div>
-                                    <div class="col-12 col-lg-3">
-                                        <label for="cidade">Cidade</label>
-                                        <input type="text" class="form-control cidade" id="cidade" placeholder="Cidade" disabled>
-                                    </div>
-                                    <div class="col-12 col-lg-3">
-                                        <label for="bairro">Bairro</label>
-                                        <input type="text" class="form-control bairro" id="bairro" placeholder="Bairro" disabled>
-                                    </div>
-                                    <div class="col-12 col-lg-1">
-                                        <label for="uf">UF</label>
-                                        <input type="text" class="form-control uf" id="uf" placeholder="UF" disabled>
-                                    </div>
-
-                                    <div class="col-12 col-lg-5">
-                                        <label for="complemento">Complemento</label>
-                                        <input type="text" class="form-control complemento" id="complemento" placeholder="ex: Apartamento 108 terceiro andar">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <h4>Dados academicos</h4>
-                                    </div>
-                                    <div class="academic-data-group col-12" data-id="1">
-                                        <div class="row">
-                                            <div class="col-12 col-lg-5">
-                                                <label for="course">Curso</label>
-                                                <input type="text" class="form-control course" id="course" placeholder="ex: Sistemas de informação">
-                                            </div>
-                                            <div class="col-12 col-lg-3">
-                                                <label for="institution">Instituição</label>
-                                                <input type="text" class="form-control institution" id="institution" placeholder="ex: Faculdade Impacta">
-                                            </div>
-                                            <div class="col-12 col-lg-2">
-                                                <label for="level">Nivel</label>
-                                                <select class="custom-select level" id="level">
-                                                    <option selected disabled>Selecione uma opção</option>
-                                                    <option value="1">Superior</option>
-                                                    <option value="2">Tecnico</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12 col-lg-2">
-                                                <label for="conclusion">Conclusão</label>
-                                                <input class="form-control conclusion" id="conclusion">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" mt-3 text-right">
-                                    <button type="button" class="btn btn-secondary add-more-courses"><i class="fas fa-plus"></i></button>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <h4>Experiências Profissionais</h4>
-                                    </div>
-                                </div>
-                                <div class="wrapper-experiencias">
-                                    <div class="experiencias" data-experiencia-id="1">
-                                        <div class="form-group row">
-                                            <div class="col-12">
-                                                <h6>Experiência</h6>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-12 col-lg-6">
-                                                <label for="empresa">Empresa</label>
-                                                <input type="text" class="form-control empresa" id="empresa" placeholder="">
-                                            </div>
-                                            <div class="col-12 col-lg-6">
-                                                <label for="cargo">Cargo</label>
-                                                <input type="text" class="form-control cargo" id="cargo" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row align-items-center">
-                                            <div class="col-12 col-lg-3">
-                                                <label for="data-entrada">Data de entrada</label>
-                                                <input type="text" class="form-control data-entrada" id="data-entrada">
-                                            </div>
-                                            <div class="col-12 col-lg-3">
-                                                <label for="data-saida">Data de saida</label>
-                                                <input type="text" class="form-control data-saida" id="data-saida">
-                                            </div>
-                                            <div class="col-12 col-lg-3">
-                                                <label>&nbsp;</label>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input tabalho-atual" id="tabalho-atual">
-                                                    <label class="custom-control-label" for="tabalho-atual">Trabalho atual</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-lg-12 mt-3">
-                                                <label for="resposabilidades">Descrevar suas responsabilidades no cargo(Opcional)</label>
-                                                <textarea class="form-control" id="resposabilidades" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" mt-3 text-right">
-                                    <button type="button" class="btn btn-secondary add-experiencia"><i class="fas fa-plus"></i></button>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <h4>Conhecimento em idiomas</h4>
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <label for="exampleFormControlInput1">Idioma</label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <label for="exampleFormControlInput1">Nivel</label>
-                                        <input type="text" class="form-control js-choice" id="exampleFormControlInput1" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-12 text-right">
-                                        <button type="button" class="btn btn-success">Criar conta</button>
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="col-xl-8">
+                    <div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <h4>Informações de contato edit&nbsp;<br></h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div><label>Email</label>
+                                    <p>luccasrobert@hotmail.com</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div><label>Celular</label>
+                                    <p>(11) 9 8016-5445</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div><label>Telefone</label>
+                                    <p>(11) 3972-5656</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h4>Endereço edit&nbsp;</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-2">
+                            <div><label>CEP</label>
+                                <p>02814-240</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div><label>Logradouro</label>
+                                <p>Rua elisio texeira leite</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-1">
+                            <div><label>Numero</label>
+                                <p>9999999</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-5">
+                            <div><label>Cidade</label>
+                                <p>São Jose do rio preto</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div><label>Bairro</label>
+                                <p>São Jose do rio preto</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-1">
+                            <div><label>UF</label>
+                                <p>SP</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-8">
+                            <div><label>Complemento</label>
+                                <p>adasjdljasldjalsdjlaj jldjaldjlasjdasjdlaksjdladlajsdljasdlaj ldjlasjdlasjdlasdj</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h4>Experiencias edit&nbsp;</h4>
+                        </div>
+                        <div class="col">
+                            <p>Cargo, empresa - Data inicio até data final(momento)</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h4>Formação academica&nbsp;edit<br></h4>
+                        </div>
+                        <div class="col-xl-12">
+                            <p>Curso, instituição - 02/2018</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h4>Idiomas edit</h4>
+                        </div>
+                        <div class="col-xl-12">
+                            <p>Idioma - nivel</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-        <script src="{{ url_for('static', filename='js/jquery.mask.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/datepicker.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/datepicker.pt-BR.js') }}"></script>
-        <script>
-            $('.birth-date').datepicker({
-                language: 'pt-BR',
-                format: 'dd/mm/yyyy'
-            })
-            $('.conclusion').datepicker({
-                language: 'pt-BR',
-                format: 'mm/yyyy'
-            })
-            const spMaskBehavior = function (val) {
-                    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009'
-                },
-                spOptions = {
-                    onKeyPress: function (val, e, field, options) {
-                        field.mask(spMaskBehavior.apply({}, arguments), options)
-                    },
-                    placeholder: '(__) ____-____'
-                }
-            $('.cpf').mask('000.000.000-00', {
-                placeholder: '___.___.___-__'
-            })
-            $('.celphone').mask(spMaskBehavior, spOptions)
-            $('.phone').mask(spMaskBehavior, spOptions)
-            $('.birth-date').mask('00/00/0000', {
-                placeholder: '__/__/____'
-            })
-            $('.conclusion').mask('00/0000', {
-                placeholder: '__/____'
-            })
-            $('.cep').mask('00000-000', {
-                placeholder: '_____-___'
-            })
-
-            function limpaDadosEndereco() {
-                $('.logradouro').val('')
-                $('.bairro').val('')
-                $('.cidade').val('')
-                $('.uf').val('')
-            }
-
-
-            $('.cep').blur(function () {
-                var cep = $(this).val().replace(/\D/g, '')
-                if (cep != '') {
-                    var validacep = /^[0-9]{8}$/
-                    if (validacep.test(cep)) {
-                        $('.logradouro').val('Procurando...')
-                        $('.bairro').val('Procurando...')
-                        $('.cidade').val('Procurando...')
-                        $('.uf').val('Procurando...')
-
-                        $.getJSON('https://viacep.com.br/ws/' + cep + '/json/?callback=?', function (dados) {
-
-                            if (!('erro' in dados)) {
-                                $('.logradouro').val(dados.logradouro)
-                                $('.bairro').val(dados.bairro)
-                                $('.cidade').val(dados.localidade)
-                                $('.uf').val(dados.uf)
-                            } else {
-                                limpaDadosEndereco()
-                                alert('CEP não encontrado.')
-                            }
-                        })
-                    } else {
-                        limpaDadosEndereco()
-                        alert('Formato de CEP inválido.')
-                    }
-                } else {
-                    limpaDadosEndereco()
-                }
-            })
-
-            function addAcademicGroup(elm) {
-                elm = $(elm).last()
-                let currentId = parseInt(elm.attr('data-id'))
-                let template = `
-                <div class="academic-data-group col-12 mt-3" data-id="${currentId+1}">
-                    <div class="row">
-                        <div class="col-12 col-lg-5">
-                            <label for="course${currentId+1}">Curso</label>
-                            <input type="text" class="form-control course" id="course${currentId+1}" placeholder="ex: Sistemas de informação">
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <label for="institution${currentId+1}">Instituição</label>
-                            <input type="text" class="form-control institution" id="institution${currentId+1}" placeholder="ex: Faculdade Impacta">
-                        </div>
-                        <div class="col-12 col-lg-2">
-                            <label for="level${currentId+1}">Nivel</label>
-                            <select class="custom-select level" id="level${currentId+1}">
-                                <option selected disabled>Selecione uma opção</option>
-                                <option value="1">Superior</option>
-                                <option value="2">Tecnico</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-lg-2 ">
-                            <label for="conclusion${currentId+1}">Conclusão</label>
-                            <input class="form-control conclusion" id="conclusion${currentId+1}">
-                        </div>
-                        <div class="col-12 col-lg-2">
-                            <span class="remove-course-line text-danger mouse-pointer">Remover</span>
-                        </div>
-                    </div>
-                </div>`
-                elm.after(template)
-                $('.conclusion').mask('00/0000', {
-                    placeholder: '__/____'
-                })
-                $('.conclusion').datepicker({
-                    language: 'pt-BR',
-                    format: 'mm/yyyy'
-                })
-            }
-
-            function addExperienciaProfissional(elm) {
-                elm = $(elm)
-                console.log(elm)
-                let currentId = parseInt(elm.find('.experiencias').last().attr('data-experiencia-id'))
-                console.log(currentId)
-                currentId++
-                let template = `
-                <div class="experiencias" data-experiencia-id="${currentId}">
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <h6>Experiência</h6>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-12 col-lg-6">
-                            <label for="empresa${currentId}">Empresa</label>
-                            <input type="text" class="form-control empresa" id="empresa${currentId}" placeholder="">
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <label for="cargo${currentId}">Cargo</label>
-                            <input type="text" class="form-control cargo" id="cargo${currentId}" placeholder="">
-                        </div>
-                    </div>
-                    <div class="form-group row align-items-center">
-                        <div class="col-12 col-lg-3">
-                            <label for="data-entrada${currentId}">Data de entrada</label>
-                            <input type="text" class="form-control data-entrada" id="data-entrada${currentId}">
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <label for="data-saida${currentId}">Data de saida</label>
-                            <input type="text" class="form-control data-saida" id="data-saida${currentId}">
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <label>&nbsp;</label>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input tabalho-atual" id="tabalho-atual${currentId}">
-                                <label class="custom-control-label" for="tabalho-atual${currentId}">Trabalho atual</label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-12 mt-3">
-                            <label for="resposabilidades${currentId}">Descrevar suas responsabilidades no cargo(Opcional)</label>
-                            <textarea class="form-control" id="resposabilidades${currentId}" rows="3"></textarea>
-                        </div>
-                        <div class="col-12 col-lg-2">
-                            <span class="remover-experiencia text-danger mouse-pointer">Remover</span>
-                        </div>
-                    </div>
-                </div>`
-                elm.append(template)
-                $('.conclusion').mask('00/0000', {
-                    placeholder: '__/____'
-                })
-                $('.conclusion').datepicker({
-                    language: 'pt-BR',
-                    format: 'mm/yyyy'
-                })
-            }
-
-            function removeAcademicGroup(elm) {
-                elm.parents('.academic-data-group').remove()
-            }
-
-            function removerExperiencia(elm) {
-                elm.parents('.experiencias').remove()
-            }
-
-            $('.add-experiencia').on('click', () => {
-                addExperienciaProfissional('.wrapper-experiencias')
-            })
-
-            $('.add-more-courses').on('click', () => {
-                addAcademicGroup('.academic-data-group')
-            })
-
-            $(document).on('click', '.remover-experiencia', (e) => {
-                removerExperiencia($(e.currentTarget))
-            })
-            $(document).on('click', '.remove-course-line', (e) => {
-                removeAcademicGroup($(e.currentTarget))
-            })
-        </script>
-    </body>
+        <footer>
+            <p class="copyright">SEARCH HEADHUNTER © 2010</p>
+        </footer>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/smart-forms.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
 
 </html>

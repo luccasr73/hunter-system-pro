@@ -1,223 +1,77 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
-    <head>
+    <%- include('comum/head', {tituloPagina}) %>
+    <% let obj = {} %>
+    <% if ( erros) { %>
+        <% erros.forEach((e)=>{ 
+            obj[e.campo] = e.mensagem
+        }) %>
+    <% } %>
+    
+    <body>
+        <%- include('comum/navbar') %>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Hunter System Pro - Criar conta</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="/css/datepicker.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
-    </head>
-
-    <body class="">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Hunter System Pro</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/vagas">Vagas <span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mr-left">
-                    <li class="nav-item active">
-                        <a class="btn btn-primary" href="/candidato/cadastro">Criar conta</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="btn btn-primary ml-lg-2" href="/login">Entrar</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="container mt-5 mb-5">
-            <div class="row justify-content-center bg-white">
-                <div class="col-12">
-                    <h1>Crie sua conta</h1>
-                    <h6>*Obrigatorio</h6>
-                    <form method="POST" action='/candidato/cadastro'>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <h4>Dados pessoais</h4>
+        <div class="flex-row register-photo" >
+            <div class="form-container">
+                <form class="bounce animated" method="post">
+                    <h2 class="text-center">
+                        Crie a sua conta aqui.
+                    </h2>
+                    <div class="form-group">
+                        <label >Usuario</label>
+                        <input class="form-control" type="text" name="usuario" placeholder="Usuário" value="<%=form.usuario%>">
+                        <%if(obj.hasOwnProperty('usuario')){%>
+                            <div class="invalido">
+                                <%=obj.usuario%>
                             </div>
-                            <div class="col-12 col-lg-8">
-                                <label for="nome">Nome completo*</label>
-                                <input type="text" class="form-control nome" id="nome" name="nome" placeholder="Digite seu nome">
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label >Senha</label>
+                        <input class="form-control" type="password" name="senha" placeholder="Senha">
+                        <%if(obj.hasOwnProperty('senha')){%>
+                            <div class="invalido">
+                                <%=obj.senha%>
                             </div>
-                            <div class="col-12 col-lg-2">
-                                <label for="cpf">CPF*</label>
-                                <input type="text" class="form-control cpf" id="cpf" name="cpf" placeholder="Digite aqui seu CPF">
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label >Confirmar senha</label>
+                        <input class="form-control" type="password" name="confirmar-senha" placeholder="Senha (repetir)">
+                        <%if(obj.hasOwnProperty('confirmar-senha')){%>
+                            <div class="invalido">
+                                <%=obj['confirmar-senha']%>
                             </div>
-                            <div class="col-12 col-lg-2">
-                                <label for="data-nascimento">Data de nascimento*</label>
-                                <input class="form-control data-nascimento" id="data-nascimento" name="data-nascimento" data-toggle="datepicker">
-                            </div>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <label class="form-check-label"><input class="form-check-input" type="checkbox">Eu concordo com os termos da licença.
+                                <br>
+                            </label>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-12 col-lg-2">
-                                <label for="estado-civil">Estado Civil*</label>
-                                <select class="custom-select estado-civil" id="estado-civil" name="estado-civil">
-                                    <option selected disabled>Selecione uma opção</option>
-                                    <option value="1">Solteiro(a)</option>
-                                    <option value="2">Casado(a)</option>
-                                    <option value="3">Prefiro não informar</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <h4>Contato</h4>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <label for="celular">Celular*</label>
-                                <input type="text" class="form-control celular" id="celular" name="celular" placeholder="">
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <label for="telefone-recado">Telefone para recados</label>
-                                <input type="text" class="form-control telefone-recado" id="telefone-recado" name="telefone-recado" placeholder="">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit" style="background-color: rgb(203,108,230);">Criar Conta
 
-                            <div class="col-12 col-lg-3">
-                                <label for="email">Email*</label>
-                                <input type="email" class="form-control email" id="email" name="email" placeholder="ex: seuemail@email.com">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <h4>Endereço</h4>
-                            </div>
-                            <div class="col-12 col-lg-2">
-                                <label for="cep">CEP*</label>
-                                <input type="text" class="form-control cep" id="cep" placeholder="">
-                            </div>
-                            <div class="col-12 col-lg-5">
-                                <label for="logradouro">Logradouro*</label>
-                                <input type="text" class="form-control logradouro" id="logradouro" name="logradouro" disabled>
-                            </div>
-                            <div class="col-12 col-lg-2">
-                                <label for="numero">Numero*</label>
-                                <input type="tel" class="form-control numero" id="numero" name="numero" placeholder="Digite aqui no numero">
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <label for="cidade">Cidade*</label>
-                                <input type="text" class="form-control cidade" id="cidade" name="cidade" placeholder="Cidade" disabled>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <label for="bairro">Bairro*</label>
-                                <input type="text" class="form-control bairro" id="bairro" name="bairro" placeholder="Bairro" disabled>
-                            </div>
-                            <div class="col-12 col-lg-1">
-                                <label for="uf">UF*</label>
-                                <input type="text" class="form-control uf" id="uf" name="uf" placeholder="UF" disabled>
-                            </div>
-
-                            <div class="col-12 col-lg-5">
-                                <label for="complemento">Complemento*</label>
-                                <input type="text" class="form-control complemento" id="complemento" name="complemento" placeholder="ex: Apartamento 108 terceiro andar">
-                            </div>
-                        </div>
-                        <div class="form-group row align-items-end">
-                            <div class="col-12">
-                                <h4>Segurança</h4>
-                            </div>
-                            <div class="col-12 col-lg-4">
-                                <label for="usuario">Usuario*</label>
-                                <input type="usuario" class="form-control usuario" id="usuario" name="usuario" placeholder="Digite seu usuario">
-                            </div>
-                            <div class="col-12 col-lg-4">
-                                <label for="senha">Senha*</label>
-                                <input type="senha" class="form-control senha" id="senha" name="senha" placeholder="Digite sua senha">
-                            </div>
-                            <div class="col-12 col-lg-4">
-                                <label for="confirmar-senha">Confirmar senha*</label>
-                                <input type="senha" class="form-control confirmar-senha" id="confirmar-senha" name="confirmar-senha" placeholder="Digite sua senha novamente">
-                            </div>
-
-
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12 text-right">
-                                <button type="submit" class="btn btn-success">Criar conta e completar cadastro</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        </button>
+                    </div>
+                    <a class="already" href="#">Você já tem uma conta? Entre aqui. </a>
+                </form>
             </div>
         </div>
+        <div class="footer-basic">
+            <footer>
+                <p class="copyright">SEARCH HEADHUNTER&nbsp;© 2010</p>
+            </footer>
+        </div>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/smart-forms.min.js"></script>
+        <script src="/js/script.min.js"></script>
+        
 
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-        <script src="/js/jquery.mask.min.js"></script>
-        <script src="/js/datepicker.min.js"></script>
-        <script src="/js/datepicker.pt-BR.js"></script>
-        <script>
-            $('.data-nascimento').datepicker({
-                language: 'pt-BR',
-                format: 'dd/mm/yyyy'
-            })
-            const mascaraCelularBrasil = function (val) {
-                    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009'
-                },
-                spOptions = {
-                    onKeyPress: function (val, e, field, options) {
-                        field.mask(mascaraCelularBrasil.apply({}, arguments), options)
-                    },
-                    placeholder: '(__) ____-____'
-                }
-            $('.cpf').mask('000.000.000-00', {
-                placeholder: '___.___.___-__'
-            })
-            $('.telefone-recado').mask(mascaraCelularBrasil, spOptions)
-            $('.celular').mask(mascaraCelularBrasil, spOptions)
-            $('.data-nascimento').mask('00/00/0000', {
-                placeholder: '__/__/____'
-            })
-            $('.cep').mask('00000-000', {
-                placeholder: '_____-___'
-            })
-
-            function limpaDadosEndereco() {
-                $('.logradouro').val('')
-                $('.bairro').val('')
-                $('.cidade').val('')
-                $('.uf').val('')
-            }
-            $('.cep').blur(function () {
-                var cep = $(this).val().replace(/\D/g, '')
-                if (cep != '') {
-                    var validacep = /^[0-9]{8}$/
-                    if (validacep.test(cep)) {
-                        $('.logradouro').val('Procurando...')
-                        $('.bairro').val('Procurando...')
-                        $('.cidade').val('Procurando...')
-                        $('.uf').val('Procurando...')
-
-                        $.getJSON('https://viacep.com.br/ws/' + cep + '/json/?callback=?', function (dados) {
-
-                            if (!('erro' in dados)) {
-                                $('.logradouro').val(dados.logradouro)
-                                $('.bairro').val(dados.bairro)
-                                $('.cidade').val(dados.localidade)
-                                $('.uf').val(dados.uf)
-                            } else {
-                                limpaDadosEndereco()
-                                alert('CEP não encontrado.')
-                            }
-                        })
-                    } else {
-                        limpaDadosEndereco()
-                        alert('Formato de CEP inválido.')
-                    }
-                } else {
-                    limpaDadosEndereco()
-                }
-            })
-        </script>
     </body>
 
 </html>
