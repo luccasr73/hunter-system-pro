@@ -14,7 +14,7 @@ class MensagemErro {
 
   mensagemValidacao (campo, tipo, contexto) {
     if (tipo === 'string.min') {
-      const mensagem = `O campo ${campo} precisa ter no minimo ${contexto.limit} caracteres!`
+      const mensagem = `O ${campo} precisa ter no minimo ${contexto.limit} caracteres!`
       return { campo, mensagem }
     }
     if (tipo === 'any.required') {
@@ -22,7 +22,7 @@ class MensagemErro {
       return { campo, mensagem }
     }
     if (tipo === 'string.regex.base') {
-      const mensagem = `O campo ${campo} precisa ter no minimo 8 caracteres, conter ao menos 1 letra maiúscula, 1 minúscula e 1 numero`
+      const mensagem = `A ${campo} precisa ter no minimo 8 caracteres, conter ao menos 1 letra maiúscula, 1 minúscula e 1 numero`
       return { campo, mensagem }
     }
     if (tipo === 'any.allowOnly' && campo === 'confirmar-senha') {
