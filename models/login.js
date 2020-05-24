@@ -5,42 +5,34 @@ const {
   MensagemErro
 } = require('../utils/mensagemValidacao')
 class Login {
-  constructor (data) {
-    this.usuario = data.usuario
-    this.senha = data.senha
-    this.tipo = data.tipo
-    this.id = data.id
+  constructor (usuario, senha, tipo, id = null) {
+    this.usuario = usuario
+    this.senha = senha
+    this.tipo = tipo
+    this.id = id
   }
 
-  criar (transaction = null) {
+  static criar (usuario, senha, tipo, transaction = null) {
     if (this.id != null) {
       return 'err'
     }
     const salt = bcrypt.genSaltSync()
-    const hash = bcrypt.hashSync(this.senha, salt)
+    const hash = bcrypt.hashSync(senha, salt)
     if (transaction) {
       return knex('login')
         .transacting(transaction)
         .insert({
-          usuario: this.usuario,
+          usuario: usuario,
           senha: hash,
-          tipo: this.tipo
+          tipo: tipo
         }).returning('*')
-        .then(e => {
-          console.log(e)
-          this.setaId(e[0])
-        })
     }
     return knex('login')
       .insert({
-        usuario: this.usuario,
+        usuario: usuario,
         senha: hash,
-        tipo: this.tipo
+        tipo: tipo
       }).returning('*')
-      .then(e => {
-        console.log(e)
-        this.setaId(e[0])
-      })
   }
 
   static buscarPorUsuario (usuario) {
@@ -49,7 +41,7 @@ class Login {
     }).first()
   }
 
-  setaId (id) {
+  setId (id) {
     this.id = id
     return this
   }
@@ -59,9 +51,11 @@ class Login {
   }
 
   static buscarPorId (id) {
-    return knex.select().from('login').where({
-      id
-    }).first()
+    return knex.select()
+      .from('login')
+      .where({
+        id
+      }).first()
   }
 
   recuperarSenha () {
