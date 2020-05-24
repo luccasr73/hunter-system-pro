@@ -2,16 +2,22 @@
 <html>
 
     <%- include('comum/head', {tituloPagina}) %>
-    <% let obj = {} %>
-    <% if ( erros) { %>
-        <% erros.forEach((e)=>{ 
+    <% let obj = {} 
+       let usuario = ''
+    %>
+    <% if ( flash && flash.message && flash.message.hasOwnProperty('erros')) { %>
+        <% flash.message.erros.forEach((e)=>{ 
             obj[e.campo] = e.mensagem
         }) %>
     <% } %>
+
+    <% if ( flash && flash.message && flash.message.hasOwnProperty('form')) { 
+        usuario = flash.message.form.usuario
+     } %>
     
     <body>
         <%- include('comum/navbar') %>
-
+        <%- JSON.stringify(flash) %>
         <div class="flex-row register-photo" >
             <div class="form-container">
                 <form class="bounce animated" method="post">
@@ -20,7 +26,7 @@
                     </h2>
                     <div class="form-group">
                         <label >Usuario</label>
-                        <input class="form-control" type="text" name="usuario" placeholder="Usuário" value="<%=form.usuario%>">
+                        <input class="form-control" type="text" name="usuario" placeholder="Usuário" value="<%=usuario.trim()%>">
                         <%if(obj.hasOwnProperty('usuario')){%>
                             <div class="invalido">
                                 <%=obj.usuario%>
