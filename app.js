@@ -4,34 +4,44 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const session = require('express-session')
-const FileStore = require('session-file-store')(session)
+const MySQLStore = require('express-mysql-session')(session)
 const passport = require('passport')
 const rotas = require('./router')
-const flash = require('connect-flash')
+const mysql = require('mysql')
+// var flash = require('express-flash-2')
 const app = express()
 const config = require('./env')
-
-app.use(express.static(path.join(__dirname, 'public')))
+const MySQLStoreEnv = require('./utils/MySQLStoreEnv')
 app.use(cookieParser(config.SECRET_KEY))
 app.use(express.json())
 app.use(express.urlencoded({
   extended: false
 }))
+const connection = mysql.createConnection(MySQLStoreEnv)
 app.use(session({
   secret: config.SECRET_KEY,
-  resave: false,
-  saveUninitialized: false,
-  store: new FileStore(),
+  resave: true,
+  saveUninitialized: true,
+  store: new MySQLStore({}, connection),
+  // store: new session.MemoryStore(),
   cookie: {
-    maxAge: 3600000,
-    secure: true,
-    httpOnly: true
+    maxAge: 3600000
+    // secure: true,
+    // httpOnly: true
   }
 }))
-app.use(flash())
+// app.use(flash())
+// ref :https://gist.github.com/brianmacarthur/a4e3e0093d368aa8e423
+app.use(function (req, res, next) {
+  // if there's a flash message in the session request, make it available in the response, then delete it
+  res.locals.flash = req.session.flash
+  delete req.session.flash
+  next()
+})
+app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-app.use(logger('combined'))
+app.use(logger('tiny'))
 
 app.use(passport.initialize())
 app.use(passport.session())
