@@ -1,54 +1,39 @@
 <!DOCTYPE html>
 <html style="background-color: #ffffff;">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Documento de Luccas</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-</head>
+    <%- include('comum/head', {tituloPagina}) %>
 
-<body>
-    <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-        <div class="container"><a class="navbar-brand" href="home.html">&nbsp;<img src="images/SearchLogo2.png" style="height: 72px;"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"></li>
-                </ul>
-                <form class="form-inline mr-auto" target="_self">
-                    <div class="form-group"><label for="search-field"></label></div>
-                </form><a class="text-dark ml-auto" href="Vagas.html" style="color: rgb(0,0,0);font-size: 17px;font-family: Lora, serif;width: 82px;">Vagas</a><a href="Cadastro.html" style="width: 89px;color: rgb(0,0,0);">Cadastro</a><button class="btn active action-button"
-                    type="button" style="color: #cb6ce6;"><a class="text-white" href="Login.html">Login</a></button></div>
+    <body>
+        <%- include('comum/navbar') %>
+        <div class="login-clean" style="background-color: rgba(255,255,255,0.4);">
+            <form method="post" class="bounce animated" style="background-color: rgba(255,255,255,0);">
+                <h2 class="sr-only">Login Form</h2>
+                <div class="illustration">
+                    <h1 style="color: rgb(203,108,230);">Entrar</h1>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="usuario" placeholder="Usuário">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="senha" placeholder="Senha">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit" style="background-color: rgb(203,108,230);">Entrar</button>
+                </div>
+                <a class="forgot" href="/recuperarsenha">
+                    Esqueceu seu usuário ou senha?<br>
+                </a>
+            </form>
         </div>
-    </nav>
-    <div class="login-clean" style="background-color: rgba(255,255,255,0.4);">
-        <form class="bounce animated" style="background-color: rgba(255,255,255,0);">
-            <h2 class="sr-only">Login Form</h2>
-            <div class="illustration">
-                <h1 style="color: rgb(203,108,230);">Entrar</h1>
-            </div>
-            <div class="form-group"><input class="form-control" type="text" name="usuario" placeholder="Usuário"></div>
-            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Senha"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color: rgb(203,108,230);">Entrar</button></div><a class="forgot" href="#">Esqueceu seu usuário ou senha?<br></a></form>
-    </div>
-    <div class="footer-basic" style="background-color: #ffffff;">
-        <footer>
-            <div class="text-center social"><a href="#" style="background-color: rgba(203,108,230,0);"><i class="icon ion-social-instagram" style="background-color: rgba(203,108,230,0);"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-            <p
-                class="copyright">SEARCH HEADHUNTER © 2010</p>
-        </footer>
-    </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/smart-forms.min.js"></script>
-    <script src="assets/js/script.min.js"></script>
-</body>
+        <div class="footer-basic" style="background-color: #ffffff;">
+            <footer>
+                <p class="copyright">SEARCH HEADHUNTER © 2010</p>
+            </footer>
+        </div>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/smart-forms.min.js"></script>
+        <script src="/js/script.min.js"></script>
+    </body>
 
 </html>
