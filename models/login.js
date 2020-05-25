@@ -77,8 +77,8 @@ class Login {
           .regex(/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/)
           .required(),
         'confirmar-senha': Joi.ref('senha'),
-        email: Joi.string(),
-        nome: Joi.string()
+        email: Joi.string().required().email({ tlds: { allow: false } }),
+        nome: Joi.string().required()
       })
       const {
         error
