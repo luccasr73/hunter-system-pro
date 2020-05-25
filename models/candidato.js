@@ -1,45 +1,51 @@
 const knex = require('../db/knex')
-const Joi = require('joi')
+
 class Candidato {
-  constructor (data) {
-    this.nome = data.nome
-    this.cpf = data.cpf
-    this.dataNascimento = data.dataNascimento
-    this.estadoCivil = data.estadoCivil
-    this.email = data.email
-    this.id = data.id
-    this.idLogin = data.idLogin
+  constructor (idLogin, nome, email, dataNascimento = null, estadoCivil = null, descricao = null, id = null) {
+    this.nome = nome
+    this.descricao = descricao
+    this.dataNascimento = dataNascimento
+    this.estadoCivil = estadoCivil
+    this.email = email
+    this.id = id
+    this.idLogin = idLogin
   }
 
-  criar (transaction = null) {
-    if (this.id != null) {
-      return 'err'
-    }
+  static criar (idLogin, email, nome, transaction = null) {
     if (transaction) {
-      return knex('candidato')
-        .transacting(transaction)
+      console.log(email)
+      console.log(nome)
+      return transaction('candidato')
         .insert({
-          nome: this.nome,
-          cpf: this.cpf,
-          data_nasc: this.dataNascimento.split('/').reverse().join('-'),
-          estado_civil: this.estadoCivil,
-          email: this.email,
-          id_login: this.idLogin
-        }).then(e => {
-          this.setId(e)
+          id_login: idLogin,
+          email,
+          nome
         })
     }
     return knex('candidato')
       .insert({
-        nome: this.nome,
-        cpf: this.cpf,
-        data_nasc: this.dataNascimento.split('/').reverse().join('-'),
-        estado_civil: this.estadoCivil,
-        email: this.email,
-        id_login: this.idLogin
-      }).then(e => {
-        this.setId(e)
+        id_login: idLogin,
+        email,
+        nome
       })
+  }
+
+  atualizar (data) {
+    // nome, email, dataNascimento = null, descricao = null, estado_civil = null, foto = null
+    console.log('rodou')
+    console.log(data)
+    // console.log(dataNascimento)
+    if (data.data_nasc === '') {
+      data.data_nasc = null
+    }
+    if (data.estado_civil === 'null') {
+      data.estado_civil = null
+    }
+    return knex('candidato').where({
+      id_login: this.idLogin
+    }).update(
+      data
+    )
   }
 
   setId (id) {
@@ -50,15 +56,15 @@ class Candidato {
     return this.id
   }
 
-  buscarPorId () {
+  static buscarPorId (id) {
     return knex.select().from('candidato').where({
-      id: this.id
+      id
     }).first()
   }
 
-  buscarPorIdLogin () {
+  static buscarPorIdLogin (idLogin) {
     return knex.select().from('candidato').where({
-      id_login: this.idLogin
+      id_login: idLogin
     }).first()
   }
 }
