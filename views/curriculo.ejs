@@ -7,142 +7,225 @@
         <%- include('comum/navbar') %>
         <div class="footer-basic" style="background-color: #ffffff;">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-12 text-center d-flex d-xl-flex justify-content-center justify-content-xl-center"><img class="img-fluid" src="/images/minibus.jpeg"></div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h2>Nome do individuo</h2>
+                <div class="card">
+                    <div class="col-12 text-right mt-2">
+                        <span class="pointer editar-dados-pessoais">
+                            <i class="fas fa-edit"></i>
+                        </span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4">
-                        <div>
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <h4>Dados Pessoais edit&nbsp;</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-6">
-                                    <div><label>Estado civil</label>
-                                        <p>Paragraph</p>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div><label>Data de nascimento</label>
-                                        <p>Paragraph</p>
-                                    </div>
-                                </div>
+                    <div class="row no-gutters mt-2">
+
+                        <div class="col-md-6 text-center d-flex justify-content-center align-items-center">
+                            <img class="img-fluid curriculo-img" src="/images/minibus.jpeg">
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-center align-items-center">
+                            <div class="card-body">
+                                <h4 class="card-title mt-3 candidato-nome"><%=candidato.nome%></h4>
+                                <p class="card-text">18 anos</p>
+                                <p class="card-text candidato-descricao">Titulo que ele quiser botar</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-8">
-                        <div>
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <h4>Informações de contato edit&nbsp;<br></h4>
+                    <hr>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Informações de contato <small><i class="fas fa-edit"></i></small></h4>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div>
+                                    <label>Email</label>
+                                    <p class="candidato-email"><%=candidato.email%></p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xl-6">
-                                    <div><label>Email</label>
-                                        <p>luccasrobert@hotmail.com</p>
-                                    </div>
+                            <div class="col-12 col-lg-2">
+                                <div>
+                                    <label>Celular</label>
+                                    <p class="candidato-celular">(11) 9 8016-5445</p>
                                 </div>
-                                <div class="col-xl-3">
-                                    <div><label>Celular</label>
-                                        <p>(11) 9 8016-5445</p>
-                                    </div>
+                            </div>
+                            <div class="col-12 col-lg-2">
+                                <div>
+                                    <label>Telefone</label>
+                                    <p class="candidato-telefone">(11) 3972-5656</p>
                                 </div>
-                                <div class="col-xl-3">
-                                    <div><label>Telefone</label>
-                                        <p>(11) 3972-5656</p>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4>Endereço
+                                            <small>
+                                                <i class="fas fa-edit"></i>
+                                            </small>
+                                        </h4>
+                                    </div>
+                                    <div class="col-12 candidato-endereco">
+                                        Logradouro Nº100, Lapa, São Paulo, SP - CEP - complemento
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <h4>Endereço edit&nbsp;</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-2">
-                                <div><label>CEP</label>
-                                    <p>02814-240</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div><label>Logradouro</label>
-                                    <p>Rua elisio texeira leite</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-1">
-                                <div><label>Numero</label>
-                                    <p>9999999</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-5">
-                                <div><label>Cidade</label>
-                                    <p>São Jose do rio preto</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-3">
-                                <div><label>Bairro</label>
-                                    <p>São Jose do rio preto</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-1">
-                                <div><label>UF</label>
-                                    <p>SP</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-8">
-                                <div><label>Complemento</label>
-                                    <p>adasjdljasldjalsdjlaj jldjaldjlasjdasjdlaksjdladlajsdljasdlaj ldjlasjdlasjdlasdj</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <h4>Experiencias edit&nbsp;</h4>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <h4>
+                                    Experiencias
+                                    <small>
+                                        <i class="fas fa-plus"></i>
+                                    </small>
+                                </h4>
                             </div>
                             <div class="col">
                                 <p>Cargo, empresa - Data inicio até data final(momento)</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <h4>Formação academica&nbsp;edit<br></h4>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <h4>Formação academica <small><i class="fas fa-plus"></i></small></h4>
                             </div>
-                            <div class="col-xl-12">
+                            <div class="col-12">
                                 <p>Curso, instituição - 02/2018</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <h4>Idiomas edit</h4>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <h4>Idiomas <small><i class="fas fa-plus"></i></small></h4>
                             </div>
-                            <div class="col-xl-12">
+                            <div class="col-12">
                                 <p>Idioma - nivel</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer>
-                <p class="copyright">SEARCH HEADHUNTER © 2010</p>
-            </footer>
         </div>
+        <div class="modal modal-editar-dados-pessoais" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar dados pessoais</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="nome">Nome</label>
+                                        <input type="text" class="form-control nome" name="nome">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control email" name="email">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="data-nasc">Data de nascimento</label>
+                                        <input type="date" class="form-control data-nasc" name="data_nasc">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="descricao">Descrição</label>
+                                        <input type="text" class="form-control descricao" name="descricao">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+
+                                    <label for="">Estado Civil</label>
+                                    <select class="custom-select estado-civil" name="estado_civil">
+                                        <option selected readonly value="null">Selecione uma opção</option>
+                                        <option value="1">Casado</option>
+                                        <option value="2">Solteiro</option>
+                                        <option value="3">Prefiro não informar</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary salvar">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <%- include('comum/footer') %>
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/smart-forms.min.js"></script>
         <script src="/js/script.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#blah')
+                            .attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $('.editar-dados-pessoais').on('click', () => {
+                axios.get('/candidato')
+                    .then(function (res) {
+                        console.log(res)
+                        let data = res.data
+                        $('.modal-editar-dados-pessoais .nome').val(data.nome)
+                        $('.modal-editar-dados-pessoais .email').val(data.email)
+                        $('.modal-editar-dados-pessoais .data-nasc').val(data.data_nasc.split('T')[0])
+                        $('.modal-editar-dados-pessoais .descricao').val(data.descricao)
+                        $('.modal-editar-dados-pessoais .estado-civil').val(data.estado_civil)
+                        $('.modal-editar-dados-pessoais').modal('show')
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            })
+            // $('.editar-dados-pessoais .salvar').on('click', () => {
+            // $('.editar-dados-pessoais .salvar').val()
+            //})
+            function serializar(elm) {
+                let data = {}
+                elm.serializeArray().map(e => {
+                    data[e.name] = e.value
+                })
+                return data
+            }
+            $('.modal-editar-dados-pessoais form').on('submit', (e) => {
+                //console.log(e)
+                e.preventDefault()
+                let data = serializar($(e.currentTarget))
+                axios.put('/candidato', data)
+                    .then(function (res) {
+                        $('.modal-editar-dados-pessoais').modal('show')
+                        let data = res.data
+                        $('.candidato-nome').text(data.nome)
+                        $('.candidato-email').text(data.email)
+                        //$('.candidato-data-nasc').val(data.data_nasc.split('T')[0])
+                        $('.candidato-descricao').text(data.descricao)
+                        //$('.candidato-estado-civil').val(data.estado_civil)
+                        $('.modal-editar-dados-pessoais').modal('hide')
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            })
+        </script>
     </body>
 
 </html>
