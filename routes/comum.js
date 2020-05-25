@@ -9,11 +9,13 @@ router.get('/', function (req, res, next) {
 })
 
 router.get('/login', function (req, res, next) {
-  res.render('login')
+  res.render('login', {
+    tituloPagina: 'Login'
+  })
 })
 
 router.post('/login', autenticacao.passport.authenticate('login', {
-  successRedirect: '/candidato/perfil',
+  successRedirect: '/candidato/curriculo',
   failureRedirect: '/login'
   // failureFlash: true
 }))
