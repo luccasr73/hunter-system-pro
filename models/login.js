@@ -1,9 +1,11 @@
 const bcrypt = require('bcryptjs')
 const knex = require('../db/knex')
 const Joi = require('joi')
+const Candidato = require('../models/candidato')
 const {
   MensagemErro
 } = require('../utils/mensagemValidacao')
+
 class Login {
   constructor (usuario, senha, tipo, id = null) {
     this.usuario = usuario
@@ -12,7 +14,7 @@ class Login {
     this.id = id
   }
 
-  static async criar (usuario, senha, tipo) {
+  static async criar (usuario, senha, tipo, email, nome) {
     const salt = bcrypt.genSaltSync()
     const hash = bcrypt.hashSync(senha, salt)
     if (tipo === 'candidato') {
@@ -24,7 +26,8 @@ class Login {
           senha: hash,
           tipo: tipo
         }).returning('*')
-      await trx('candidato').insert({ id_login: idLogin[0] }).returning('*')
+      await Candidato.criar(idLogin[0], email, nome, trx)
+      // await trx('candidato').insert({ id_login: idLogin[0] }).returning('*')
       await trx.commit()
       return trx.isCompleted()
     }
@@ -73,7 +76,9 @@ class Login {
           // referencia https://regexr.com/39agr
           .regex(/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/)
           .required(),
-        'confirmar-senha': Joi.ref('senha')
+        'confirmar-senha': Joi.ref('senha'),
+        email: Joi.string(),
+        nome: Joi.string()
       })
       const {
         error
