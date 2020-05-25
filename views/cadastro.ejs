@@ -6,7 +6,7 @@
        let usuario = ''
     %>
     <% if ( flash && flash.message && flash.message.hasOwnProperty('erros')) { %>
-        <% flash.message.erros.forEach((e)=>{ 
+    <% flash.message.erros.forEach((e)=>{ 
             obj[e.campo] = e.mensagem
         }) %>
     <% } %>
@@ -14,53 +14,63 @@
     <% if ( flash && flash.message && flash.message.hasOwnProperty('form')) { 
         usuario = flash.message.form.usuario
      } %>
-    
+
     <body>
         <%- include('comum/navbar') %>
         <%- JSON.stringify(flash) %>
-        <div class="flex-row register-photo" >
+        <div class="flex-row register-photo">
             <div class="form-container">
                 <form class="bounce animated" method="post">
                     <h2 class="text-center">
                         Crie a sua conta aqui.
                     </h2>
                     <div class="form-group">
+                        <label>Nome</label>
+                        <input class="form-control" type="text" name="nome" placeholder="Nome" value="<%=usuario.trim()%>">
+                        <%if(obj.hasOwnProperty('nome')){%>
+                        <div class="invalido">
+                            <%=obj.usuario%>
+                        </div>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label >Email</label>
+                        <input class="form-control" type="email" name="email" placeholder="Email" value="<%=usuario.trim()%>">
+                        <%if(obj.hasOwnProperty('email')){%>
+                        <div class="invalido">
+                            <%=obj.usuario%>
+                        </div>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
                         <label >Usuario</label>
                         <input class="form-control" type="text" name="usuario" placeholder="Usuário" value="<%=usuario.trim()%>">
                         <%if(obj.hasOwnProperty('usuario')){%>
-                            <div class="invalido">
-                                <%=obj.usuario%>
-                            </div>
+                        <div class="invalido">
+                            <%=obj.usuario%>
+                        </div>
                         <%}%>
                     </div>
                     <div class="form-group">
                         <label >Senha</label>
                         <input class="form-control" type="password" name="senha" placeholder="Senha">
                         <%if(obj.hasOwnProperty('senha')){%>
-                            <div class="invalido">
-                                <%=obj.senha%>
-                            </div>
+                        <div class="invalido">
+                            <%=obj.senha%>
+                        </div>
                         <%}%>
                     </div>
                     <div class="form-group">
                         <label >Confirmar senha</label>
                         <input class="form-control" type="password" name="confirmar-senha" placeholder="Senha (repetir)">
                         <%if(obj.hasOwnProperty('confirmar-senha')){%>
-                            <div class="invalido">
-                                <%=obj['confirmar-senha']%>
-                            </div>
+                        <div class="invalido">
+                            <%=obj['confirmar-senha']%>
+                        </div>
                         <%}%>
                     </div>
                     <div class="form-group">
-                        <div class="form-check">
-                            <label class="form-check-label"><input class="form-check-input" type="checkbox">Eu concordo com os termos da licença.
-                                <br>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit" style="background-color: rgb(203,108,230);">Criar Conta
-
                         </button>
                     </div>
                     <a class="already" href="#">Você já tem uma conta? Entre aqui. </a>
