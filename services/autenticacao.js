@@ -41,6 +41,7 @@ passport.use('login', new LocalStrategy({
 }, async (usuario, senha, done) => {
   try {
     usuario = await Login.buscarPorUsuario(usuario)
+    // console.log(usuario)
     if (!usuario) {
       console.log('usuario n existe')
       return done(null, false, { message: 'Usuario incorreto' })
@@ -49,6 +50,7 @@ passport.use('login', new LocalStrategy({
       console.log('senha errada')
       return done(null, false, { message: 'Senha incorreta' })
     } else {
+      // console.log(usuario)
       return done(null, usuario)
     }
   } catch (error) {
