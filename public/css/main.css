@@ -13,14 +13,33 @@ body {
     max-height: 200px;
 }
 
-.mouse-pointer {
+.pointer {
     cursor: pointer;
 }
 
 .invalido{
-
     width: 100%;
     margin-top: .25rem;
     font-size: 80%;
     color: #dc3545;
+}
+
+.nav-bar-btn{
+    background: #cb6ce6;
+    border-radius: 20px;
+    font-size: inherit;
+    color: #fff !important;
+    box-shadow: none;
+    border: none;
+    text-shadow: none;
+    padding: 8px 20px;
+    transition: background-color .25s;
+}
+.curriculo-img{
+    object-fit: fill;
+    width: 150px;
+    height: 150px;
+    max-height: 250px;
+    border: solid 1px white;
+    border-radius: 8px;
 }
