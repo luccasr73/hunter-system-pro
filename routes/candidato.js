@@ -2,39 +2,35 @@ const express = require('express')
 const router = express.Router()
 const Login = require('../models/login')
 const Candidato = require('../models/candidato')
-const { usuarioEstaLogado, usuarioNaoEstaLogado } = require('../services/autenticacao')
+const { middleware } = require('../services/autenticacao')
+const { MensagemFlash } = require('../utils/mensagemFlash')
 
-router.get('/cadastrar', usuarioNaoEstaLogado(), function (req, res, next) {
-  // console.log(res.locals.flash)
-  // res.locals.flash.message.forEach(e => {
-  //   console.log(e)
-  // })
-
+router.get('/cadastrar', middleware.usuarioNaoEstaLogado(), function (req, res, next) {
+  const usuario = req.user
   return res.render('cadastro', {
     tituloPagina: 'Criar conta',
-    flash: res.locals.flash
+    flash: MensagemFlash.ler(res),
+    usuario
   })
 })
 
-router.get('/curriculo', usuarioEstaLogado(), async function (req, res, next) {
-  // console.log(req.user)
-  // console.log(req.isAuthenticated())
-  // console.log(req.session)
+router.get('/curriculo', middleware.usuarioEstaLogado(), async function (req, res, next) {
   const usuario = req.user
   const candidato = await Candidato.buscarPorIdLogin(usuario.id)
   res.render('curriculo', {
     tituloPagina: 'Curriculo',
-    candidato
+    candidato,
+    usuario
   })
 })
 
-router.get('/', usuarioEstaLogado(), async function (req, res, next) {
+router.get('/', middleware.usuarioEstaLogado(), async function (req, res, next) {
   const usuario = req.user
   const candidato = await Candidato.buscarPorIdLogin(usuario.id)
   res.json(candidato)
 })
 
-router.put('/', usuarioEstaLogado(), async function (req, res, next) {
+router.put('/', middleware.usuarioEstaLogado(), async function (req, res, next) {
   const usuario = req.user
   const data = req.body
   try {
@@ -48,15 +44,12 @@ router.put('/', usuarioEstaLogado(), async function (req, res, next) {
   }
 })
 
-router.post('/cadastrar', async function (req, res, next) {
+router.post('/cadastrar', middleware.usuarioNaoEstaLogado(), async function (req, res, next) {
   const tipo = 'candidato'
   const data = req.body
   const erros = Login.validar(data)
   if (erros !== true) {
-    req.session.flash = {
-      type: 'info',
-      message: { form: data, erros }
-    }
+    MensagemFlash.criar(req, 'data', { form: data, erros })
     return res.redirect('/candidato/cadastrar')
   }
 
@@ -70,18 +63,13 @@ router.post('/cadastrar', async function (req, res, next) {
     )
     const user = { usuario: data.usuario, senha: data.senha }
     req.login(user, function (err) {
-      // console.log(user)
       if (err) {
-        // console.log(err)
         return next(err)
       }
       res.redirect('/candidato/curriculo')
     })
   } catch (error) {
-    req.session.flash = {
-      type: 'info',
-      message: { form: data, dbErro: error }
-    }
+    MensagemFlash.criar(req, 'data', { form: data, dbErro: error })
     return res.redirect('/candidato/cadastrar')
   }
 })
