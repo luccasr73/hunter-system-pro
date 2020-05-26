@@ -5,8 +5,8 @@ exports.up = function (knex) {
     table.string('usuario').notNullable().unique()
     table.string('senha').notNullable()
     table.string('tipo').notNullable()
-    table.timestamp('criado').defaultTo(knex.fn.now())
-    table.timestamp('atualizado').defaultTo(knex.fn.now())
+    table.timestamp('criado_em').notNullable()
+      .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
   }).then(() => {
     console.log('tabela login criada')
   })
