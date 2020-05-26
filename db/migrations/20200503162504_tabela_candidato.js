@@ -10,6 +10,7 @@ exports.up = function (knex) {
     table.string('estado_civil')
     table.string('foto')
     table.string('titulo')
+    table.string('celular')
     table.string('email').notNullable().unique()
     // table.timestamp('criado').defaultTo(knex.fn.now())
     // table.timestamp('atualizado').defaultTo(knex.fn.now())
