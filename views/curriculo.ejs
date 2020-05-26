@@ -185,6 +185,13 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
+
+            function taVazio(data) {
+                if (data == '' || data == null || data == 'null') {
+                    return true
+                }
+                return false
+            }
             $('.editar-dados-pessoais').on('click', () => {
                 axios.get('/candidato')
                     .then(function (res) {
@@ -192,7 +199,13 @@
                         let data = res.data
                         $('.modal-editar-dados-pessoais .nome').val(data.nome)
                         $('.modal-editar-dados-pessoais .email').val(data.email)
-                        $('.modal-editar-dados-pessoais .data-nasc').val(data.data_nasc.split('T')[0])
+                        if (taVazio(data.data_nasc)){
+                            $('.modal-editar-dados-pessoais .data-nasc').val('')
+                        }
+                        if (!taVazio(data.data_nasc)){
+                            $('.modal-editar-dados-pessoais .data-nasc').val(data.data_nasc.split('T')[0])
+                        }
+                        
                         $('.modal-editar-dados-pessoais .descricao').val(data.descricao)
                         $('.modal-editar-dados-pessoais .estado-civil').val(data.estado_civil)
                         $('.modal-editar-dados-pessoais').modal('show')
