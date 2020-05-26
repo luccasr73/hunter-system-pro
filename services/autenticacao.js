@@ -41,43 +41,45 @@ passport.use('login', new LocalStrategy({
 }, async (usuario, senha, done) => {
   try {
     usuario = await Login.buscarPorUsuario(usuario)
-    // console.log(usuario)
+    // console.log('a', usuario)
     if (!usuario) {
-      console.log('usuario n existe')
-      return done(null, false, { message: 'Usuario incorreto' })
+      // console.log('usuario n existe')
+      return done(null, false)
     }
     if (!await compararSenha(senha, usuario.senha)) {
-      console.log('senha errada')
-      return done(null, false, { message: 'Senha incorreta' })
+      // console.log('senha errada')
+      return done(null, false)
     } else {
       // console.log(usuario)
       return done(null, usuario)
     }
   } catch (error) {
+    // console.log(error)
     return done(error)
   }
 }))
 
-const usuarioEstaLogado = () => {
-  return function (req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
+const middleware = {
+  usuarioEstaLogado: () => {
+    return function (req, res, next) {
+      if (req.isAuthenticated()) {
+        return next()
+      }
+      res.redirect('/login')
     }
-    res.redirect('/login')
-  }
-}
+  },
 
-const usuarioNaoEstaLogado = () => {
-  return function (req, res, next) {
-    if (!req.isAuthenticated()) {
-      return next()
+  usuarioNaoEstaLogado: () => {
+    return function (req, res, next) {
+      if (!req.isAuthenticated()) {
+        return next()
+      }
+      res.redirect('/')
     }
-    res.redirect('/')
   }
 }
 
 module.exports = {
-  usuarioEstaLogado,
-  usuarioNaoEstaLogado,
+  middleware,
   passport
 }
