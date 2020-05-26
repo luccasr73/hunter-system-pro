@@ -2,8 +2,6 @@ exports.up = function (knex) {
   return knex.schema.createTable('empresa', function (table) {
     table.engine('INNODB')
     table.increments().primary()
-    table.integer('id_endereco').unsigned().notNullable()
-      .references('id').inTable('endereco')
     table.string('cnpj').notNullable()
     table.string('nome_fantasia').notNullable()
     table.string('foto')

@@ -2,11 +2,8 @@ exports.up = function (knex) {
   return knex.schema.createTable('candidato', function (table) {
     table.engine('INNODB')
     table.increments().primary()
-    table.integer('id_endereco').unsigned().notNullable()
-      .references('id').inTable('endereco')
     table.integer('id_login').unsigned().notNullable()
       .references('id').inTable('login')
-
     table.string('nome').notNullable()
     table.date('data_nasc')
     // table.string('cpf')
