@@ -21,6 +21,14 @@ class MensagemErro {
       const mensagem = `O campo ${campo} é obrigatorio`
       return { campo, mensagem }
     }
+    if (tipo === 'any.empty') {
+      const mensagem = `O campo ${campo} é obrigatorio`
+      return { campo, mensagem }
+    }
+    if (tipo === 'string.email') {
+      const mensagem = `${campo} precisa ser valido`
+      return { campo, mensagem }
+    }
     if (tipo === 'string.regex.base') {
       const mensagem = `A ${campo} precisa ter no minimo 8 caracteres, conter ao menos 1 letra maiúscula, 1 minúscula e 1 numero`
       return { campo, mensagem }
