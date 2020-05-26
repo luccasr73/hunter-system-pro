@@ -11,6 +11,7 @@ const mysql = require('mysql')
 const app = express()
 const config = require('./env')
 const MySQLStoreEnv = require('./utils/MySQLStoreEnv')
+var flash = require('connect-flash')
 app.use(cookieParser(config.SECRET_KEY))
 app.use(express.json())
 app.use(express.urlencoded({
@@ -29,14 +30,15 @@ app.use(session({
     // httpOnly: true
   }
 }))
+app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
 // ref :https://gist.github.com/brianmacarthur/a4e3e0093d368aa8e423
 app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
-  res.locals.flash = req.session.flash
-  delete req.session.flash
+  res.locals.flashCustom = req.session.flashCustom
+  delete req.session.flashCustom
   next()
 })
 
@@ -60,6 +62,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
   // render the error page
+  console.log(err)
   res.status(err.status || 500)
   res.render('error')
 })
