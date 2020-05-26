@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const knex = require('../db/knex')
 const Joi = require('joi')
 const Candidato = require('../models/candidato')
+const EnderecoCandidato = require('./enderecoCandidato')
 const {
   MensagemErro
 } = require('../utils/mensagemValidacao')
@@ -26,8 +27,8 @@ class Login {
           senha: hash,
           tipo: tipo
         }).returning('*')
-      await Candidato.criar(idLogin[0], email, nome, trx)
-      // await trx('candidato').insert({ id_login: idLogin[0] }).returning('*')
+      const candidatoId = await Candidato.criar(idLogin[0], email, nome, trx)
+      await EnderecoCandidato.criar(candidatoId[0], { transaction: trx })
       await trx.commit()
       return trx.isCompleted()
     }
@@ -90,6 +91,7 @@ class Login {
     })
     if (error) {
       const arrErrors = error.details.map(err => {
+        console.log(err)
         const msg = new MensagemErro(err.type, err.context)
         return msg.gerar()
       })
