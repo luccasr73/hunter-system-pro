@@ -13,21 +13,19 @@ class Candidato {
 
   static criar (idLogin, email, nome, transaction = null) {
     if (transaction) {
-      console.log(email)
-      console.log(nome)
       return transaction('candidato')
         .insert({
           id_login: idLogin,
           email,
           nome
-        })
+        }).returning('*')
     }
     return knex('candidato')
       .insert({
         id_login: idLogin,
         email,
         nome
-      })
+      }).returning('*')
   }
 
   atualizar (data) {
@@ -48,12 +46,8 @@ class Candidato {
     )
   }
 
-  setId (id) {
-    this.id = id
-  }
+  static async atualizarEndereco (idLogin, endereco) {
 
-  getId () {
-    return this.id
   }
 
   static buscarPorId (id) {
