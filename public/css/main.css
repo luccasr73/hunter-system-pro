@@ -24,9 +24,8 @@ body {
     color: #dc3545;
 }
 
-.nav-bar-btn{
+.btn-pink{
     background: #cb6ce6;
-    border-radius: 20px;
     font-size: inherit;
     color: #fff !important;
     box-shadow: none;
@@ -34,6 +33,10 @@ body {
     text-shadow: none;
     padding: 8px 20px;
     transition: background-color .25s;
+}
+
+.btn-rounded{
+    border-radius: 20px;
 }
 .curriculo-img{
     object-fit: fill;
