@@ -3,7 +3,12 @@
 
     <%- include('comum/head', {tituloPagina}) %>
     <% let obj = {} 
-       let usuario = ''
+       let formDados = {
+         usuario:'',
+         email:'',
+         nome:'',
+       }
+       
     %>
     <% if ( flash && flash.message && flash.message.hasOwnProperty('erros')) { %>
     <% flash.message.erros.forEach((e)=>{ 
@@ -12,12 +17,14 @@
     <% } %>
 
     <% if ( flash && flash.message && flash.message.hasOwnProperty('form')) { 
-        usuario = flash.message.form.usuario
+        formDados.usuario = flash.message.form.usuario
+        formDados.email = flash.message.form.email
+        formDados.nome = flash.message.form.nome
      } %>
 
     <body>
         <%- include('comum/navbar') %>
-        <%- JSON.stringify(flash) %>
+        <%- //JSON.stringify(flash) %>
         <div class="flex-row register-photo">
             <div class="form-container">
                 <form class="bounce animated" method="post">
@@ -26,25 +33,25 @@
                     </h2>
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text" name="nome" placeholder="Nome" value="<%=usuario.trim()%>">
+                        <input class="form-control" type="text" name="nome" placeholder="Nome" value="<%=formDados.nome.trim()%>">
                         <%if(obj.hasOwnProperty('nome')){%>
                         <div class="invalido">
-                            <%=obj.usuario%>
+                            <%=obj.nome%>
                         </div>
                         <%}%>
                     </div>
                     <div class="form-group">
                         <label >Email</label>
-                        <input class="form-control" type="email" name="email" placeholder="Email" value="<%=usuario.trim()%>">
+                        <input class="form-control" type="email" name="email" placeholder="Email" value="<%=formDados.email.trim()%>">
                         <%if(obj.hasOwnProperty('email')){%>
                         <div class="invalido">
-                            <%=obj.usuario%>
+                            <%=obj.email%>
                         </div>
                         <%}%>
                     </div>
                     <div class="form-group">
                         <label >Usuario</label>
-                        <input class="form-control" type="text" name="usuario" placeholder="Usuário" value="<%=usuario.trim()%>">
+                        <input class="form-control" type="text" name="usuario" placeholder="Usuário" value="<%=formDados.usuario.trim()%>">
                         <%if(obj.hasOwnProperty('usuario')){%>
                         <div class="invalido">
                             <%=obj.usuario%>
