@@ -65,38 +65,39 @@ class Login {
   }
 
   static validar (data) {
-    // console.log(JSON.stringify(data))
-    try {
-      const schema = Joi.object({
-        usuario: Joi.string()
-          .min(5)
-          .required(),
-        senha: Joi.string()
-          // eslint-disable-next-line no-useless-escape
-          // referencia https://regexr.com/39agr
-          .regex(/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/)
-          .required(),
-        'confirmar-senha': Joi.ref('senha'),
-        email: Joi.string().required().email({ tlds: { allow: false } }),
-        nome: Joi.string().required()
+    const schema = Joi.object({
+      usuario: Joi.string()
+        .min(5)
+        .required(),
+      senha: Joi.string()
+      // eslint-disable-next-line no-useless-escape
+      // referencia https://regexr.com/39agr
+        .regex(/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/)
+        .required(),
+      'confirmar-senha': Joi.ref('senha'),
+      email: Joi.string()
+        .required()
+        .email({
+          tlds: {
+            allow: false
+          }
+        }),
+      nome: Joi.string()
+        .required()
+    })
+    const { error } = schema.validate(data, {
+      abortEarly: false
+    })
+    if (error) {
+      const arrErrors = error.details.map(err => {
+        const msg = new MensagemErro(err.type, err.context)
+        return msg.gerar()
       })
-      const {
-        error
-        // value
-      } = schema.validate(data, {
-        abortEarly: false
+      return arrErrors.filter(e => {
+        return e != null
       })
-      if (error) {
-        const arrErrors = error.details.map(err => {
-          const msg = new MensagemErro(err.type, err.context)
-          return msg.gerar()
-        })
-        return arrErrors.filter(e => { return e != null })
-      }
-      return true
-    } catch (error) {
-      return error
     }
+    return true
   }
 }
 
