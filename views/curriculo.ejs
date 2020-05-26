@@ -27,11 +27,6 @@
                         <div class="col-md-6 d-flex justify-content-center align-items-center">
                             <div class="card-body">
                                 <h4 class="card-title mt-3 candidato-nome"><%=candidato.nome%></h4>
-                                <p class="card-text">
-                                    <% if(!taVazio(candidato.data_nasc)){%>
-                                    <%=candidato.data_nasc%>
-                                    <%}%>
-                                </p>
                                 <p class="card-text candidato-descricao">
                                 <% if(!taVazio(candidato.descricao)){%>
                                     <%=candidato.descricao%>
