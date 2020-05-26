@@ -1,23 +1,35 @@
 const express = require('express')
 const router = express.Router()
-const autenticacao = require('../services/autenticacao')
-/* GET home page. */
+const { passport, middleware } = require('../services/autenticacao')
+
 router.get('/', function (req, res, next) {
+  const usuario = req.user
   res.render('index', {
-    tituloPagina: 'Inicio'
+    tituloPagina: 'Inicio',
+    usuario
   })
 })
 
-router.get('/login', function (req, res, next) {
-  res.render('login', {
-    tituloPagina: 'Login'
+router.get('/entrar', middleware.usuarioNaoEstaLogado(), function (req, res, next) {
+  const usuario = req.user
+  // console.log(req.body)
+  // console.log(req.flash('error'))
+  res.render('entrar', {
+    tituloPagina: 'Entrar',
+    erroLogin: req.flash('error'),
+    usuario
   })
 })
 
-router.post('/login', autenticacao.passport.authenticate('login', {
+router.get('/sair', middleware.usuarioEstaLogado(), function (req, res, next) {
+  req.logout()
+  res.redirect('/entrar')
+})
+
+router.post('/entrar', passport.authenticate('login', {
   successRedirect: '/candidato/curriculo',
-  failureRedirect: '/login'
-  // failureFlash: true
+  failureRedirect: '/entrar',
+  failureFlash: 'Usuario e/ou senha invalido'
 }))
 
 module.exports = router
