@@ -1,0 +1,63 @@
+<div class="modal modal-editar-dados-pessoais" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar dados pessoais</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="nome">Nome</label>
+                                <input type="text" class="form-control nome" name="nome">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control email" name="email">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="celular">Celular</label>
+                                <input type="text" class="form-control celular" name="celular">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="data-nasc">Data de nascimento</label>
+                                <input type="date" class="form-control data-nasc" name="data_nasc">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="descricao">Descrição</label>
+                                <input type="text" class="form-control descricao" name="descricao">
+                            </div>
+                        </div>
+                        <div class="col-6">
+
+                            <label for="">Estado Civil</label>
+                            <select class="custom-select estado-civil" name="estado_civil">
+                                <option selected readonly value="null">Selecione uma opção</option>
+                                <option value="1">Casado</option>
+                                <option value="2">Solteiro</option>
+                                <option value="3">Prefiro não informar</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

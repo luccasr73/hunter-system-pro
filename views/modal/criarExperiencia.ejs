@@ -1,0 +1,55 @@
+<div class="modal modal-criar-experiencia" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adicionar nova experiencia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="cargo">Cargo</label>
+                                <input type="text" class="form-control cargo" name="cargo">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="empresa">Empresa</label>
+                                <input type="text" class="form-control empresa" name="empresa">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="data-entrada">Data de entrada</label>
+                                <input type="date" class="form-control data-entrada" name="data_entrada">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="data-saida">Data de saida</label>
+                                <input type="date" class="form-control data-saida" name="data_saida">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="atual">&nbsp;</label>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input atual" id="atual" name="atual">
+                                    <label class="custom-control-label" for="atual">Atual</label>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
