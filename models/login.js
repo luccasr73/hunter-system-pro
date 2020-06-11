@@ -1,8 +1,6 @@
 const bcrypt = require('bcryptjs')
 const knex = require('../db/knex')
 const Joi = require('joi')
-const Candidato = require('../models/candidato')
-const EnderecoCandidato = require('./enderecoCandidato')
 const {
   MensagemErro
 } = require('../utils/mensagemValidacao')
@@ -15,22 +13,23 @@ class Login {
     this.id = id
   }
 
-  static async criar (usuario, senha, tipo, email, nome) {
+  static async criar (usuario, senha, tipo, transaction = null) {
     const salt = bcrypt.genSaltSync()
     const hash = bcrypt.hashSync(senha, salt)
-    if (tipo === 'candidato') {
-      const trxProvider = knex.transactionProvider()
-      const trx = await trxProvider()
-      const idLogin = await trx('login')
+    if (transaction) {
+      return transaction('login')
         .insert({
           usuario: usuario,
           senha: hash,
           tipo: tipo
         }).returning('*')
-      const candidatoId = await Candidato.criar(idLogin[0], email, nome, trx)
-      await EnderecoCandidato.criar(candidatoId[0], { transaction: trx })
-      await trx.commit()
-      return trx.isCompleted()
+    } else {
+      return knex('login')
+        .insert({
+          usuario: usuario,
+          senha: hash,
+          tipo: tipo
+        }).returning('*')
     }
   }
 
@@ -90,12 +89,12 @@ class Login {
       abortEarly: false
     })
     if (error) {
-      const arrErrors = error.details.map(err => {
+      const arrErros = error.details.map(err => {
         console.log(err)
         const msg = new MensagemErro(err.type, err.context)
         return msg.gerar()
       })
-      return arrErrors.filter(e => {
+      return arrErros.filter(e => {
         return e != null
       })
     }
