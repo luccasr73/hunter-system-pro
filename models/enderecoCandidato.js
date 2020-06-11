@@ -1,42 +1,31 @@
 const knex = require('../db/knex')
-
 class EnderecoCandidato {
-  static criar (idCandidato, { cep = null, logradouro = null, numero = null, bairro = null, cidade = null, uf = null, complemento = null, transaction = null } = {}) {
+  static criar (idCandidato, idEndereco, transaction = null) {
     if (transaction) {
       return transaction('endereco_candidato')
         .insert({
           id_candidato: idCandidato,
-          cep,
-          logradouro,
-          numero,
-          bairro,
-          cidade,
-          uf,
-          complemento
+          id_endereco: idEndereco
         }).returning('*')
     }
-    return knex('candidato')
+    return knex('endereco_candidato')
       .insert({
-        cep, logradouro, numero, bairro, cidade, uf, complemento
+        id_candidato: idCandidato,
+        id_endereco: idEndereco
       }).returning('*')
   }
 
-  async atualizar (data) {
-    // nome, email, dataNascimento = null, descricao = null, estado_civil = null, foto = null
-    console.log('rodou')
-    console.log(data)
-    // console.log(dataNascimento)
-    if (data.data_nasc === '') {
-      data.data_nasc = null
+  static buscar (idCandidato, transacao = null) {
+    if (transacao) {
+      return transacao('endereco_candidato')
+        .where({
+          id_candidato: idCandidato
+        }).first()
     }
-    if (data.estado_civil === 'null') {
-      data.estado_civil = null
-    }
-    return knex('endereco').where({
-      id_login: this.idLogin
-    }).update(
-      data
-    )
+    return knex('endereco_candidato')
+      .where({
+        id_candidato: idCandidato
+      }).first()
   }
 }
 
