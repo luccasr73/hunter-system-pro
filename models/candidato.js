@@ -1,7 +1,7 @@
 const knex = require('../db/knex')
-
+const { trocaVazioPorNulo } = require('../utils/json')
 class Candidato {
-  constructor (idLogin, nome, email, dataNascimento = null, estadoCivil = null, descricao = null, id = null) {
+  /* constructor (idLogin, nome, email, dataNascimento = null, estadoCivil = null, descricao = null, id = null) {
     this.nome = nome
     this.descricao = descricao
     this.dataNascimento = dataNascimento
@@ -9,7 +9,7 @@ class Candidato {
     this.email = email
     this.id = id
     this.idLogin = idLogin
-  }
+  } */
 
   static criar (idLogin, email, nome, transaction = null) {
     if (transaction) {
@@ -28,26 +28,17 @@ class Candidato {
       }).returning('*')
   }
 
-  atualizar (data) {
+  static atualizar (id, { nome, email, dataNascimento = null, estadoCivil = null, descricao = null } = {}) {
     // nome, email, dataNascimento = null, descricao = null, estado_civil = null, foto = null
-    console.log('rodou')
-    console.log(data)
-    // console.log(dataNascimento)
-    if (data.data_nasc === '') {
-      data.data_nasc = null
-    }
-    if (data.estado_civil === 'null') {
-      data.estado_civil = null
-    }
+    // console.log(id)
+    let data = { nome, email, data_nasc: dataNascimento, estado_civil: estadoCivil, descricao }
+    data = trocaVazioPorNulo(Object.keys(data), data)
+    // console.log(data)
     return knex('candidato').where({
-      id_login: this.idLogin
+      id_login: id
     }).update(
       data
     )
-  }
-
-  static async atualizarEndereco (idLogin, endereco) {
-
   }
 
   static buscarPorId (id) {
