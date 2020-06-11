@@ -2,12 +2,6 @@
 <html>
 
     <%- include('comum/head', {tituloPagina}) %>
-    <% function taVazio(data){
-        if(data == ''|| data == null || data =='null'){
-            return true
-        }
-        return false
-    } %>
 
     <body>
         <%- include('comum/navbar') %>
@@ -28,7 +22,7 @@
                             <div class="card-body">
                                 <h4 class="card-title mt-3 candidato-nome"><%=candidato.nome%></h4>
                                 <p class="card-text candidato-descricao">
-                                <% if(!taVazio(candidato.descricao)){%>
+                                    <% if(!TemplateUtils.taVazio(candidato.descricao)){%>
                                     <%=candidato.descricao%>
                                     <%}%></p>
                             </div>
@@ -65,7 +59,17 @@
                                     </h4>
                                 </div>
                                 <div class="col-12 candidato-endereco">
-                                    Logradouro Nº100, Lapa, São Paulo, SP - CEP - complemento
+                                    
+                                    <!-- Logradouro Nº100, Lapa, São Paulo, SP - CEP - complemento -->
+                                    <% if(endereco){%>
+                                        <%=endereco.logradouro%> Nº<%=endereco.numero%>, <%=endereco.bairro%> <%=endereco.cidade%>, <%=endereco.uf%> <%=endereco.cep%> 
+                                        <% if(endereco.complemento){%>
+                                         - <%=endereco.complemento%>
+                                        <%}%>
+                                    <%}%></p>
+                                    <% if(!endereco){%>
+                                        -
+                                    <%}%></p>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +78,7 @@
                         <div class="col-12">
                             <h4>
                                 Experiencias
-                                <small>
+                                <small class="pointer criar-experiencia">
                                     <i class="fas fa-plus"></i>
                                 </small>
                             </h4>
@@ -103,69 +107,9 @@
             </div>
         </div>
         </div>
-        <div class="modal modal-editar-dados-pessoais" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar dados pessoais</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form>
-                        <div class="modal-body">
-                            <div class="form-row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="nome">Nome</label>
-                                        <input type="text" class="form-control nome" name="nome">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control email" name="email">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="celular">Celular</label>
-                                        <input type="text" class="form-control celular" name="celular">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="data-nasc">Data de nascimento</label>
-                                        <input type="date" class="form-control data-nasc" name="data_nasc">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="descricao">Descrição</label>
-                                        <input type="text" class="form-control descricao" name="descricao">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-
-                                    <label for="">Estado Civil</label>
-                                    <select class="custom-select estado-civil" name="estado_civil">
-                                        <option selected readonly value="null">Selecione uma opção</option>
-                                        <option value="1">Casado</option>
-                                        <option value="2">Solteiro</option>
-                                        <option value="3">Prefiro não informar</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary salvar">Salvar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <%- include('modal/dadosGerais') %>
+        <%- include('modal/endereco') %>
+        <%- include('modal/criarExperiencia') %>
         <%- include('comum/footer') %>
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
@@ -173,79 +117,148 @@
         <script src="/js/script.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script src="/js/utils.js"></script>
         <script>
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
+            let DadosGerais = {} || DadosGerais
+            let Endereco = {} || Endereco
+            let Experiencia = {} || Experiencia
+            let Academico = {} || Academico
+            let Idioma = {} || Idioma
+            
+            DadosGerais.main = function () {
+                $('.editar-dados-pessoais').on('click', () => {
+                    axios.get('/candidato/curriculo/geral')
+                        .then(function (res) {
+                            console.log(res)
+                            let data = res.data
+                            $('.modal-editar-dados-pessoais .nome').val(data.nome)
+                            $('.modal-editar-dados-pessoais .email').val(data.email)
 
-                    reader.onload = function (e) {
-                        $('#blah')
-                            .attr('src', e.target.result);
-                    };
+                            if (Utils.taVazio(data.data_nasc)) {
+                                $('.modal-editar-dados-pessoais .data-nasc').val('')
+                            }
+                            if (!Utils.taVazio(data.data_nasc)) {
+                                $('.modal-editar-dados-pessoais .data-nasc').val(data.data_nasc.split('T')[0])
+                            }
 
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-
-            function taVazio(data) {
-                if (data == '' || data == null || data == 'null') {
-                    return true
-                }
-                return false
-            }
-            $('.editar-dados-pessoais').on('click', () => {
-                axios.get('/candidato')
-                    .then(function (res) {
-                        console.log(res)
-                        let data = res.data
-                        $('.modal-editar-dados-pessoais .nome').val(data.nome)
-                        $('.modal-editar-dados-pessoais .email').val(data.email)
-                        if (taVazio(data.data_nasc)){
-                            $('.modal-editar-dados-pessoais .data-nasc').val('')
-                        }
-                        if (!taVazio(data.data_nasc)){
-                            $('.modal-editar-dados-pessoais .data-nasc').val(data.data_nasc.split('T')[0])
-                        }
-                        
-                        $('.modal-editar-dados-pessoais .descricao').val(data.descricao)
-                        $('.modal-editar-dados-pessoais .estado-civil').val(data.estado_civil)
-                        $('.modal-editar-dados-pessoais').modal('show')
-                    })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
-            })
-            // $('.editar-dados-pessoais .salvar').on('click', () => {
-            // $('.editar-dados-pessoais .salvar').val()
-            //})
-            function serializar(elm) {
-                let data = {}
-                elm.serializeArray().map(e => {
-                    data[e.name] = e.value
+                            $('.modal-editar-dados-pessoais .descricao').val(data.descricao)
+                            $('.modal-editar-dados-pessoais .estado-civil').val(data.estado_civil)
+                            $('.modal-editar-dados-pessoais').modal('show')
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
                 })
-                return data
+                $('.modal-editar-dados-pessoais form').on('submit', (e) => {
+                    e.preventDefault()
+                    let data = Utils.serializar($(e.currentTarget))
+                    axios.put('/candidato/curriculo/geral', data)
+                        .then(function (res) {
+                            // $('.modal-editar-dados-pessoais').modal('show')
+                            let data = res.data
+                            $('.candidato-nome').text(data.nome)
+                            $('.candidato-email').text(data.email)
+                            //$('.candidato-data-nasc').val(data.data_nasc.split('T')[0])
+                            $('.candidato-descricao').text(data.descricao)
+                            //$('.candidato-estado-civil').val(data.estado_civil)
+                            $('.modal-editar-dados-pessoais').modal('hide')
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                })
             }
-            $('.modal-editar-dados-pessoais form').on('submit', (e) => {
-                //console.log(e)
-                e.preventDefault()
-                let data = serializar($(e.currentTarget))
-                axios.put('/candidato', data)
-                    .then(function (res) {
-                        $('.modal-editar-dados-pessoais').modal('show')
-                        let data = res.data
-                        $('.candidato-nome').text(data.nome)
-                        $('.candidato-email').text(data.email)
-                        //$('.candidato-data-nasc').val(data.data_nasc.split('T')[0])
-                        $('.candidato-descricao').text(data.descricao)
-                        //$('.candidato-estado-civil').val(data.estado_civil)
-                        $('.modal-editar-dados-pessoais').modal('hide')
-                    })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
-            })
+
+            Endereco.main = function () {
+                $('.editar-endereco').on('click', (e) => {
+                    axios.get('/candidato/curriculo/endereco')
+                        .then(function (res) {
+                            console.log(res)
+                            let data = res.data
+                            $('.modal-editar-endereco .cep').val(data.cep)
+                            $('.modal-editar-endereco .logradouro').val(data.logradouro)
+                            $('.modal-editar-endereco .numero').val(data.numero)
+                            $('.modal-editar-endereco .bairro').val(data.bairro)
+                            $('.modal-editar-endereco .cidade').val(data.cidade)
+                            $('.modal-editar-endereco .uf').val(data.uf)
+                            $('.modal-editar-endereco .complemento').val(data.complemento)
+                            $('.modal-editar-endereco').modal('show')
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                    //$('.modal-editar-endereco').modal('show')
+                })
+                $('.modal-editar-endereco form').on('submit', (e) => {
+                    e.preventDefault()
+                    let data = Utils.serializar($(e.currentTarget))
+                    console.log(data)
+                    axios.put('/candidato/curriculo/endereco', data)
+                        .then(function (res) {
+                            let endereco = res.data
+                            let texto
+                            if(Utils.taVazio(data.complemento)){
+                                texto = `${endereco.logradouro} Nº${endereco.numero}, ${endereco.bairro} ${endereco.cidade}, ${endereco.uf} ${endereco.cep}`
+                            } else {
+                                texto = `${endereco.logradouro} Nº${endereco.numero}, ${endereco.bairro} ${endereco.cidade}, ${endereco.uf} ${endereco.cep} - ${endereco.complemento}`
+                                 
+                            }
+                            
+                            $('.candidato-endereco').text(texto)
+                            $('.modal-editar-endereco').modal('hide')
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                })
+            }
+           
+            Experiencia.main = function () {
+                $('.criar-experiencia').on('click', (e) => {
+                    /*axios.get('/candidato/curriculo/endereco')
+                        .then(function (res) {
+                            console.log(res)
+                            let data = res.data
+                            $('.modal-criar-experiencia .cep').val(data.cep)
+                            $('.modal-criar-experiencia .logradouro').val(data.logradouro)
+                            $('.modal-criar-experiencia .numero').val(data.numero)
+                            $('.modal-criar-experiencia .bairro').val(data.bairro)
+                            $('.modal-criar-experiencia .cidade').val(data.cidade)
+                            $('.modal-criar-experiencia .uf').val(data.uf)
+                            $('.modal-criar-experiencia .complemento').val(data.complemento)
+                            $('.modal-criar-experiencia').modal('show')
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })*/
+                    $('.modal-criar-experiencia').modal('show')
+                })
+                $('.modal-criar-experiencia form').on('submit', (e) => {
+                    e.preventDefault()
+                    let data = Utils.serializar($(e.currentTarget))
+                    console.log(data)
+                    /*axios.put('/candidato/curriculo/endereco', data)
+                        .then(function (res) {
+                            let endereco = res.data
+                            let texto
+
+                            $('.modal-criar-experiencia').modal('hide')
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })*/
+                })
+            }
+           
+            DadosGerais.main()
+            Endereco.main()
+            Experiencia.main()
         </script>
     </body>
 
