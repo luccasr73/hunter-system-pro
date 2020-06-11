@@ -65,7 +65,7 @@ const middleware = {
       if (req.isAuthenticated()) {
         return next()
       }
-      res.redirect('/login')
+      res.redirect('/entrar')
     }
   },
 
