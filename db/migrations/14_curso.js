@@ -6,7 +6,7 @@ exports.up = function (knex) {
       .references('id').inTable('candidato')
     table.string('nome').notNullable()
     table.string('instituicao').notNullable()
-    table.date('data_formarcao').notNullable()
+    table.date('data_formacao').notNullable()
   }).then(() => {
     console.log('tabela curso criada')
   })

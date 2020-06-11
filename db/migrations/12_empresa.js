@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.string('foto')
     table.boolean('ativo')
     table.string('descricao').notNullable()
-    table.timestamp('atualizado').defaultTo(knex.fn.now())
+    // table.timestamp('atualizado').defaultTo(knex.fn.now())
   }).then(() => {
     console.log('tabela empresa criada')
   })

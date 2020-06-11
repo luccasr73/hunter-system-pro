@@ -1,9 +1,7 @@
 exports.up = function (knex) {
-  return knex.schema.createTable('endereco_candidato', function (table) {
+  return knex.schema.createTable('endereco', function (table) {
     table.engine('INNODB')
     table.increments().primary()
-    table.integer('id_candidato').unsigned().notNullable()
-      .references('id').inTable('candidato')
     table.string('cep')
     table.string('logradouro')
     table.string('numero')
@@ -12,10 +10,10 @@ exports.up = function (knex) {
     table.string('uf')
     table.string('complemento')
   }).then(() => {
-    console.log('tabela endereco_candidato criada')
+    console.log('tabela endereco criada')
   })
 }
 
 exports.down = function (knex) {
-  return knex.schema.dropTable('endereco_candidato')
+  return knex.schema.dropTable('endereco')
 }
