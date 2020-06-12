@@ -1,37 +1,32 @@
 const knex = require('../db/knex')
-
-class Endereco {
-  static criar (idCandidato { cep = null, logradouro = null, numero = null, bairro = null, cidade = null, uf = null, complemento = null, transaction = null } = {}) {
+class EnderecoEmpresa {
+  static criar (idEmpresa, idEndereco, transaction = null) {
     if (transaction) {
-      return transaction('endereco_candidato')
+      return transaction('endereco_empresa')
         .insert({
-          id_candidato:idCandidato,
-          cep, logradouro, numero, bairro, cidade, uf, complemento
+          id_empresa: idEmpresa,
+          id_endereco: idEndereco
         }).returning('*')
     }
-    return knex('candidato')
+    return knex('endereco_empresa')
       .insert({
-        cep, logradouro, numero, bairro, cidade, uf, complemento
+        id_empresa: idEmpresa,
+        id_endereco: idEndereco
       }).returning('*')
   }
 
-  async atualizar (data) {
-    // nome, email, dataNascimento = null, descricao = null, estado_civil = null, foto = null
-    console.log('rodou')
-    console.log(data)
-    // console.log(dataNascimento)
-    if (data.data_nasc === '') {
-      data.data_nasc = null
+  static buscar (idEmpresa, transacao = null) {
+    if (transacao) {
+      return transacao('endereco_empresa')
+        .where({
+          id_empresa: idEmpresa
+        }).first()
     }
-    if (data.estado_civil === 'null') {
-      data.estado_civil = null
-    }
-    return knex('endereco').where({
-      id_login: this.idLogin
-    }).update(
-      data
-    )
+    return knex('endereco_empresa')
+      .where({
+        id_empresa: idEmpresa
+      }).first()
   }
 }
 
-module.exports = Endereco
+module.exports = EnderecoEmpresa
