@@ -2,7 +2,7 @@
 <html>
 
     <%- include('comum/head', {tituloPagina}) %>
-
+    <%moment.locale('pt-br');%>
     <body>
         <%- include('comum/navbar') %>
         <div class="footer-basic" style="background-color: #ffffff;">
@@ -84,7 +84,12 @@
                             </h4>
                         </div>
                         <div class="col">
-                            <p>Cargo, empresa - Data inicio até data final(momento)</p>
+                            <% if(experiencias){%>
+                                <%- include('componentes/experiencias',{experiencias}) %>
+                            <%}%>
+                            <% if(!experiencias){%>
+                                <p>-</p>
+                            <%}%>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -219,30 +224,15 @@
            
             Experiencia.main = function () {
                 $('.criar-experiencia').on('click', (e) => {
-                    /*axios.get('/candidato/curriculo/endereco')
-                        .then(function (res) {
-                            console.log(res)
-                            let data = res.data
-                            $('.modal-criar-experiencia .cep').val(data.cep)
-                            $('.modal-criar-experiencia .logradouro').val(data.logradouro)
-                            $('.modal-criar-experiencia .numero').val(data.numero)
-                            $('.modal-criar-experiencia .bairro').val(data.bairro)
-                            $('.modal-criar-experiencia .cidade').val(data.cidade)
-                            $('.modal-criar-experiencia .uf').val(data.uf)
-                            $('.modal-criar-experiencia .complemento').val(data.complemento)
-                            $('.modal-criar-experiencia').modal('show')
-                        })
-                        .catch(function (error) {
-                            // handle error
-                            console.log(error);
-                        })*/
+                    $('.modal-criar-experiencia form').trigger('reset');
+                    $('.modal-criar-experiencia .atual').trigger('change');
                     $('.modal-criar-experiencia').modal('show')
                 })
                 $('.modal-criar-experiencia form').on('submit', (e) => {
                     e.preventDefault()
                     let data = Utils.serializar($(e.currentTarget))
                     console.log(data)
-                    /*axios.put('/candidato/curriculo/endereco', data)
+                    axios.post('/candidato/curriculo/experiencia', data)
                         .then(function (res) {
                             let endereco = res.data
                             let texto
@@ -252,7 +242,15 @@
                         .catch(function (error) {
                             // handle error
                             console.log(error);
-                        })*/
+                        })
+                })
+                $('.modal-criar-experiencia .atual').on('change', (e)=>{
+                    console.log(e)
+                    if($(e.currentTarget).is(':checked')){
+                        $('.data-final').attr('disabled',true)
+                    } else {
+                        $('.data-final').removeAttr('disabled')
+                    }
                 })
             }
            
