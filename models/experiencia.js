@@ -49,6 +49,19 @@ class Experiencia {
       }).update(data)
   }
 
+  static deletar (idExperiencia, transacao = null) {
+    if (transacao) {
+      return transacao('experiencia')
+        .where({
+          id: idExperiencia
+        }).del()
+    }
+    return knex('experiencia')
+      .where({
+        id: idExperiencia
+      }).del()
+  }
+
   static buscar (idExperiencia, transacao = null) {
     if (transacao) {
       return transacao('experiencia')

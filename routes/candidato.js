@@ -170,21 +170,15 @@ router.post('/curriculo/experiencia', middleware.usuarioEstaLogado(), async func
     throw new Error(error)
   }
 })
-
-router.put('/curriculo/experiencia/:id', middleware.usuarioEstaLogado(), async function (req, res, next) {
-  const usuario = req.user
+router.delete('/curriculo/experiencia', middleware.usuarioEstaLogado(), async function (req, res, next) {
+  // const usuario = req.user
   const data = req.body
   try {
-    const candidato = await Candidato.buscarPorIdLogin(usuario.id)
-    const enderecoCandidato = await EnderecoCandidato.buscar(candidato.id)
-    await Endereco.atualizar(enderecoCandidato.id_endereco, {
-      ...data
-    })
-    res.json(req.body)
+    await Experiencia.deletar(data.id)
+    res.json(data)
   } catch (error) {
     res.json(error)
     throw new Error(error)
   }
 })
-
 module.exports = router

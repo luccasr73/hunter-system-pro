@@ -1,16 +1,22 @@
 <% experiencias.forEach(experiencia => { %>
-<div>
+<div class="mt-2 experiencia-wrapper">
   <div>
     <strong><%= experiencia.cargo %></strong> em
     <strong><%= experiencia.nome_empresa%></strong>
+    <span class="pointer excluir-experiencia" data-id-experiencia="<%= experiencia.id%>">
+      <i class="fas fa-trash"></i>
+    </span>
   </div>
   <div>
     De <%= moment(experiencia.data_inicio).format('DD/MM/yyyy')%> até <%
     if(TemplateUtils.taVazio(experiencia.data_final)){%> o momento -
-    <strong><%= moment(experiencia.data_inicio).from(true)%></strong> <%}%> <%
-    if(!TemplateUtils.taVazio(experiencia.data_final)){%> <%=
-    moment(experiencia.data_final).format('DD/MM/yyyy')%> -
     <strong><%= moment(experiencia.data_inicio).fromNow(true)%></strong>
+
+    <%}%> <% if(!TemplateUtils.taVazio(experiencia.data_final)){%> <%=
+    moment(experiencia.data_final).format('DD/MM/yyyy')%> -
+    <strong>
+      <%= moment(experiencia.data_inicio).from(experiencia.data_final,true)%>
+    </strong>
     <%}%>
   </div>
 </div>

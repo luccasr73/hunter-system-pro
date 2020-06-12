@@ -62,7 +62,7 @@
                                     
                                     <!-- Logradouro Nº100, Lapa, São Paulo, SP - CEP - complemento -->
                                     <% if(endereco){%>
-                                        <%=endereco.logradouro%> Nº<%=endereco.numero%>, <%=endereco.bairro%> <%=endereco.cidade%>, <%=endereco.uf%> <%=endereco.cep%> 
+                                        <%=endereco.logradouro%> Nº<%=endereco.numero%>, <%=endereco.bairro%> - <%=endereco.cidade%>, <%=endereco.uf%> <%=endereco.cep%> 
                                         <% if(endereco.complemento){%>
                                          - <%=endereco.complemento%>
                                         <%}%>
@@ -206,9 +206,9 @@
                             let endereco = res.data
                             let texto
                             if(Utils.taVazio(data.complemento)){
-                                texto = `${endereco.logradouro} Nº${endereco.numero}, ${endereco.bairro} ${endereco.cidade}, ${endereco.uf} ${endereco.cep}`
+                                texto = `${endereco.logradouro} Nº${endereco.numero}, ${endereco.bairro} - ${endereco.cidade}, ${endereco.uf} ${endereco.cep}`
                             } else {
-                                texto = `${endereco.logradouro} Nº${endereco.numero}, ${endereco.bairro} ${endereco.cidade}, ${endereco.uf} ${endereco.cep} - ${endereco.complemento}`
+                                texto = `${endereco.logradouro} Nº${endereco.numero}, ${endereco.bairro} - ${endereco.cidade}, ${endereco.uf} ${endereco.cep} - ${endereco.complemento}`
                                  
                             }
                             
@@ -251,6 +251,20 @@
                     } else {
                         $('.data-final').removeAttr('disabled')
                     }
+                })
+                $('.excluir-experiencia').on('click', (e) => {
+                    let id = $(e.currentTarget).attr('data-id-experiencia')
+                    let data = { id }
+                    axios.delete('/candidato/curriculo/experiencia', { data })
+                        .then(function (res) {
+                            let data = res.data
+                            console.log(data.id)
+                            $(`[data-id-experiencia="${data.id}"]`).parents('.experiencia-wrapper').remove()
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
                 })
             }
            
