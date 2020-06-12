@@ -15,6 +15,7 @@ class Experiencia {
       data_inicio: dataInicio,
       data_final: dataFinal
     }
+    console.log(data)
     data = trocaVazioPorNulo(Object.keys(data), data)
     if (transacao) {
       return transacao('experiencia')
@@ -61,16 +62,16 @@ class Experiencia {
       }).first()
   }
 
-  static buscarTodas (idExperiencia, transacao = null) {
+  static buscarPorCandidato (idCandidato, transacao = null) {
     if (transacao) {
       return transacao('experiencia')
         .where({
-          id: idExperiencia
+          id_candidato: idCandidato
         })
     }
     return knex('experiencia')
       .where({
-        id: idExperiencia
+        id_candidato: idCandidato
       })
   }
 }
