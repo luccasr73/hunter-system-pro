@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.string('cargo').notNullable()
     table.string('tags').notNullable()
     table.boolean('ativo')
-    table.string('atividades_resposabilidades').notNullable()
+    table.string('resposabilidades').notNullable()
     table.string('requisitos').notNullable()
     table.timestamp('criado_em').notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
