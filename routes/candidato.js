@@ -7,6 +7,7 @@ const Endereco = require('../models/endereco')
 const EnderecoCandidato = require('../models/enderecoCandidato')
 const Experiencia = require('../models/experiencia')
 const Template = require('../utils/Template')
+const moment = require('moment')
 const {
   middleware
 } = require('../services/autenticacao')
@@ -28,11 +29,14 @@ router.get('/curriculo', middleware.usuarioEstaLogado(), async function (req, re
   const candidato = await Candidato.buscarPorIdLogin(usuario.id)
   const enderecoCandidato = await EnderecoCandidato.buscar(candidato.id)
   const endereco = await Endereco.buscar(enderecoCandidato.id_endereco)
+  const experiencias = await Experiencia.buscarPorCandidato(candidato.id)
   res.render('curriculo', {
     tituloPagina: 'Curriculo',
     candidato,
     endereco,
+    experiencias,
     usuario,
+    moment,
     TemplateUtils: Template
   })
 })
@@ -144,7 +148,7 @@ router.get('/curriculo/experiencias', middleware.usuarioEstaLogado(), async func
   const usuario = req.user
   try {
     const candidato = await Candidato.buscarPorIdLogin(usuario.id)
-    const experiencias = await Experiencia.buscar(candidato.id)
+    const experiencias = await Experiencia.buscarPorCandidato(candidato.id)
     res.json(experiencias)
   } catch (error) {
     res.status(500).send('erro')
@@ -157,9 +161,8 @@ router.post('/curriculo/experiencia', middleware.usuarioEstaLogado(), async func
   const data = req.body
   try {
     const candidato = await Candidato.buscarPorIdLogin(usuario.id)
-    const enderecoCandidato = await EnderecoCandidato.buscar(candidato.id)
-    await Endereco.atualizar(enderecoCandidato.id_endereco, {
-      ...data
+    await Experiencia.criar(candidato.id, data.cargo, data.empresa, data.data_inicio, {
+      dataFinal: data.data_final
     })
     res.json(req.body)
   } catch (error) {
