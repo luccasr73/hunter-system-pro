@@ -16,7 +16,7 @@ class Curso {
       .insert(data).returning('*')
   }
 
-  static atualizar (idExperiencia, cargo, nomeEmpresa, dataInicio, {
+  static atualizar (idCurso, cargo, nomeEmpresa, dataInicio, {
     dataFinal = null,
     transacao = null
   } = {}) {
@@ -29,12 +29,12 @@ class Curso {
     if (transacao) {
       return transacao('curso')
         .where({
-          id: idExperiencia
+          id: idCurso
         }).update(data)
     }
     return knex('curso')
       .where({
-        id: idExperiencia
+        id: idCurso
       }).update(data)
   }
 
