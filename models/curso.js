@@ -16,15 +16,11 @@ class Curso {
       .insert(data).returning('*')
   }
 
-  static atualizar (idCurso, cargo, nomeEmpresa, dataInicio, {
-    dataFinal = null,
-    transacao = null
-  } = {}) {
+  static atualizar (idCurso, nome, instituicao, dataFormacao, transacao = null) {
     const data = {
-      cargo,
-      nome_empresa: nomeEmpresa,
-      data_inicio: dataInicio,
-      data_final: dataFinal
+      nome,
+      instituicao,
+      data_formacao: dataFormacao
     }
     if (transacao) {
       return transacao('curso')
