@@ -1,10 +1,11 @@
 const knex = require('../db/knex')
 
 class Vaga {
-  static criar (idEmpresa, cargo, tags, resposabilidades, requisitos, transacao = null) {
+  static criar (idEmpresa, cargo, tags, ativo, resposabilidades, requisitos, transacao = null) {
     const data = {
       id_empresa: idEmpresa,
       cargo,
+      ativo,
       tags,
       resposabilidades,
       requisitos
