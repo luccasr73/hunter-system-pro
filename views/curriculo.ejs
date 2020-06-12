@@ -83,7 +83,7 @@
                                 </small>
                             </h4>
                         </div>
-                        <div class="col">
+                        <div class="col experiencias">
                             <% if(experiencias){%>
                                 <%- include('componentes/experiencias',{experiencias}) %>
                             <%}%>
@@ -115,6 +115,8 @@
         <%- include('modal/dadosGerais') %>
         <%- include('modal/endereco') %>
         <%- include('modal/criarExperiencia') %>
+        <%- include('modal/criaIdioma') %>
+        <%- include('modal/criarAcademica') %>
         <%- include('comum/footer') %>
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
@@ -122,6 +124,7 @@
         <script src="/js/script.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js" integrity="sha256-4HOrwHz9ACPZBxAav7mYYlbeMiAL0h6+lZ36cLNpR+E=" crossorigin="anonymous"></script>
         <script src="/js/utils.js"></script>
         <script>
             let DadosGerais = {} || DadosGerais
@@ -129,7 +132,7 @@
             let Experiencia = {} || Experiencia
             let Academico = {} || Academico
             let Idioma = {} || Idioma
-            
+            moment.locale('pt-br')
             DadosGerais.main = function () {
                 $('.editar-dados-pessoais').on('click', () => {
                     axios.get('/candidato/curriculo/geral')
@@ -231,12 +234,46 @@
                 $('.modal-criar-experiencia form').on('submit', (e) => {
                     e.preventDefault()
                     let data = Utils.serializar($(e.currentTarget))
-                    console.log(data)
+                    //console.log(data)
                     axios.post('/candidato/curriculo/experiencia', data)
                         .then(function (res) {
-                            let endereco = res.data
-                            let texto
-
+                            let experiencia = res.data
+                            let templateInterno
+                            console.log(experiencia)
+                            //console.log(experiencia.hasOwnProperty('data_final'))
+                            if(!experiencia.hasOwnProperty('data_final')){
+                                console.log('aqui')
+                                 /*html*/
+                                templateInterno =`o momento -
+                                <strong>
+                                    ${moment(experiencia.data_inicio).fromNow(true)}
+                                </strong>`
+                            } else {
+                                 /*html*/
+                                templateInterno =`
+                                ${moment(experiencia.data_final).format('DD/MM/yyyy')} -
+                                <strong>
+                                  ${moment(experiencia.data_inicio).from(experiencia.data_final, true)}
+                                </strong>`
+                            }
+                            /*html*/
+                            let template = (interno) => `
+                            <div class="mt-2 experiencia-wrapper">
+                                <div>
+                                  <strong>${experiencia.cargo}</strong> em
+                                  <strong>${experiencia.empresa}</strong>
+                                  <span class="pointer excluir-experiencia" 
+                                  data-id-experiencia="${experiencia.id}">
+                                    <i class="fas fa-trash"></i>
+                                  </span>
+                                </div>
+                                <div>
+                                  De ${moment(experiencia.data_inicio).format('DD/MM/yyyy')} até
+                                  ${interno}
+                                </div>
+                            </div>`
+                            //console.log(template(templateInterno))
+                            $('.experiencias').append(template(templateInterno))
                             $('.modal-criar-experiencia').modal('hide')
                         })
                         .catch(function (error) {
