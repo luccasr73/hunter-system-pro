@@ -161,10 +161,11 @@ router.post('/curriculo/experiencia', middleware.usuarioEstaLogado(), async func
   const data = req.body
   try {
     const candidato = await Candidato.buscarPorIdLogin(usuario.id)
-    await Experiencia.criar(candidato.id, data.cargo, data.empresa, data.data_inicio, {
+    const id = await Experiencia.criar(candidato.id, data.cargo, data.empresa, data.data_inicio, {
       dataFinal: data.data_final
     })
-    res.json(req.body)
+    data.id = id[0]
+    res.json(data)
   } catch (error) {
     res.json(error)
     throw new Error(error)
