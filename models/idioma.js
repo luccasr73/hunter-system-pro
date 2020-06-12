@@ -15,7 +15,7 @@ class Idioma {
       .insert(data).returning('*')
   }
 
-  static atualizar (idExperiencia, descricao, nivel, transacao = null) {
+  static atualizar (idIdioma, descricao, nivel, transacao = null) {
     const data = {
       descricao,
       nivel
@@ -23,12 +23,12 @@ class Idioma {
     if (transacao) {
       return transacao('idioma')
         .where({
-          id: idExperiencia
+          id: idIdioma
         }).update(data)
     }
     return knex('idioma')
       .where({
-        id: idExperiencia
+        id: idIdioma
       }).update(data)
   }
 
