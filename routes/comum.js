@@ -21,7 +21,7 @@ router.get('/entrar', middleware.usuarioNaoEstaLogado(), function (req, res, nex
   })
 })
 
-router.get('/sair', middleware.usuarioEstaLogado(), function (req, res, next) {
+router.get('/sair', function (req, res, next) {
   req.logout()
   res.redirect('/entrar')
 })
