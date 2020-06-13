@@ -1,0 +1,12 @@
+<% idiomas.forEach(idioma => { %>
+  <div class="mt-2 idioma-wrapper">
+    <div>
+      <strong><%=idioma.descricao%></strong> -
+      <strong><%=idioma.nivel%></strong>
+      <span class="pointer excluir-idioma" 
+      data-id-idioma="<%=idioma.id%>">
+        <i class="fas fa-trash"></i>
+      </span>
+    </div>
+</div>
+<% })%>

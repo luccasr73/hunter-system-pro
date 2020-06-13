@@ -1,0 +1,15 @@
+<% cursos.forEach(curso => { %>
+  <div class="mt-2 curso-wrapper">
+    <div>
+      <strong><%=curso.nome%></strong>,
+      <strong><%=curso.instituicao%></strong>
+      <span class="pointer excluir-curso" 
+      data-id-curso="<%=curso.id%>">
+        <i class="fas fa-trash"></i>
+      </span>
+    </div>
+    <div>
+      Conclusão: <%=moment(curso.data_formacao).format('DD/MM/yyyy')%>
+    </div>
+</div>
+<% })%>

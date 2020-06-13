@@ -66,10 +66,10 @@
                                         <% if(endereco.complemento){%>
                                          - <%=endereco.complemento%>
                                         <%}%>
-                                    <%}%></p>
+                                    <%}%>
                                     <% if(!endereco){%>
                                         -
-                                    <%}%></p>
+                                    <%}%>
                                 </div>
                             </div>
                         </div>
@@ -94,18 +94,35 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <h4>Formação academica <small><i class="fas fa-plus"></i></small></h4>
+                            <h4>Formação academica 
+                                <small class="pointer criar-curso">
+                                    <i class="fas fa-plus"></i>
+                                </small>
+                            </h4>
                         </div>
-                        <div class="col-12">
-                            <p>Curso, instituição - 02/2018</p>
+                        <div class="col-12 cursos">
+                            <% if(cursos){%>
+                                <%- include('componentes/cursos',{cursos}) %>
+                            <%}%>
+                            <% if(!cursos){%>
+                                <p>-</p>
+                            <%}%>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <h4>Idiomas <small><i class="fas fa-plus"></i></small></h4>
+                            <h4>Idiomas <small class="pointer criar-idioma">
+                                <i class="fas fa-plus"></i>
+                            </small>
+                        </h4>
                         </div>
-                        <div class="col-12">
-                            <p>Idioma - nivel</p>
+                        <div class="col-12  idiomas">
+                            <% if(idiomas){%>
+                                <%- include('componentes/idiomas',{idiomas}) %>
+                            <%}%>
+                            <% if(!idiomas){%>
+                                <p>-</p>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -115,8 +132,8 @@
         <%- include('modal/dadosGerais') %>
         <%- include('modal/endereco') %>
         <%- include('modal/criarExperiencia') %>
-        <%- include('modal/criaIdioma') %>
-        <%- include('modal/criarAcademica') %>
+        <%- include('modal/criarIdioma') %>
+        <%- include('modal/criarCurso') %>
         <%- include('comum/footer') %>
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
@@ -130,7 +147,7 @@
             let DadosGerais = {} || DadosGerais
             let Endereco = {} || Endereco
             let Experiencia = {} || Experiencia
-            let Academico = {} || Academico
+            let Curso = {} || Curso
             let Idioma = {} || Idioma
             moment.locale('pt-br')
             DadosGerais.main = function () {
@@ -282,14 +299,14 @@
                         })
                 })
                 $('.modal-criar-experiencia .atual').on('change', (e)=>{
-                    console.log(e)
+                    //console.log(e)
                     if($(e.currentTarget).is(':checked')){
                         $('.data-final').attr('disabled',true)
                     } else {
                         $('.data-final').removeAttr('disabled')
                     }
                 })
-                $('.excluir-experiencia').on('click', (e) => {
+                $(document).on('click', '.excluir-experiencia',(e) => {
                     let id = $(e.currentTarget).attr('data-id-experiencia')
                     let data = { id }
                     axios.delete('/candidato/curriculo/experiencia', { data })
@@ -305,9 +322,116 @@
                 })
             }
            
+            Curso.main = function () {
+                $('.criar-curso').on('click', (e) => {
+                    $('.modal-criar-curso form').trigger('reset');
+                    $('.modal-criar-curso .atual').trigger('change');
+                    $('.modal-criar-curso').modal('show')
+                })
+                $('.modal-criar-curso form').on('submit', (e) => {
+                    e.preventDefault()
+                    let data = Utils.serializar($(e.currentTarget))
+                    //console.log(data)
+                    axios.post('/candidato/curriculo/curso', data)
+                        .then(function (res) {
+                            let curso = res.data
+                            console.log(curso)
+                            /*html*/
+                            let template = `
+                            <div class="mt-2 curso-wrapper">
+                                <div>
+                                  <strong>${curso.nome}</strong>,
+                                  <strong>${curso.instituicao}</strong>
+                                  <span class="pointer excluir-curso" 
+                                  data-id-curso="${curso.id}">
+                                    <i class="fas fa-trash"></i>
+                                  </span>
+                                </div>
+                                <div>
+                                  Conclusão: ${moment(curso.data_formacao).format('DD/MM/yyyy')}
+                                </div>
+                            </div>`
+                            //console.log(template(templateInterno))
+                            $('.cursos').append(template)
+                            $('.modal-criar-curso').modal('hide')
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                })
+                $(document).on('click', '.excluir-curso',(e) => {
+                    let id = $(e.currentTarget).attr('data-id-curso')
+                    let data = { id }
+                    axios.delete('/candidato/curriculo/curso', { data })
+                        .then(function (res) {
+                            let data = res.data
+                            console.log(data.id)
+                            $(`[data-id-curso="${data.id}"]`).parents('.curso-wrapper').remove()
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                })
+            }
+           
+            Idioma.main = function () {
+                $('.criar-idioma').on('click', (e) => {
+                    $('.modal-criar-idioma form').trigger('reset');
+                    $('.modal-criar-idioma .atual').trigger('change');
+                    $('.modal-criar-idioma').modal('show')
+                })
+                $('.modal-criar-idioma form').on('submit', (e) => {
+                    e.preventDefault()
+                    let data = Utils.serializar($(e.currentTarget))
+                    //console.log(data)
+                    axios.post('/candidato/curriculo/idioma', data)
+                        .then(function (res) {
+                            let idioma = res.data
+                            console.log(idioma)
+                            /*html*/
+                            let template = `
+                            <div class="mt-2 idioma-wrapper">
+                                <div>
+                                  <strong>${idioma.descricao}</strong> - 
+                                  <strong>${idioma.nivel}</strong>
+                                  <span class="pointer excluir-idioma" 
+                                  data-id-idioma="${idioma.id}">
+                                    <i class="fas fa-trash"></i>
+                                  </span>
+                                </div>
+                            </div>`
+                            //console.log(template(templateInterno))
+                            $('.idiomas').append(template)
+                            $('.modal-criar-idioma').modal('hide')
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                })
+                $(document).on('click','.excluir-idioma', (e) => {
+                    let id = $(e.currentTarget).attr('data-id-idioma')
+                    let data = { id }
+                    axios.delete('/candidato/curriculo/idioma', { data })
+                        .then(function (res) {
+                            let data = res.data
+                            console.log(data.id)
+                            $(`[data-id-idioma="${data.id}"]`).parents('.idioma-wrapper').remove()
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                })
+            }
+           
             DadosGerais.main()
             Endereco.main()
             Experiencia.main()
+            Curso.main()
+            Idioma.main()
         </script>
     </body>
 
