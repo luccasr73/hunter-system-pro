@@ -8,6 +8,7 @@ class Curso {
       instituicao,
       data_formacao: dataFormacao
     }
+    console.log(data)
     if (transacao) {
       return transacao('curso')
         .insert(data).returning('*')
@@ -67,7 +68,7 @@ class Curso {
           id_candidato: idCandidato
         })
     }
-    return knex('experiencia')
+    return knex('curso')
       .where({
         id_candidato: idCandidato
       })
