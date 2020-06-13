@@ -76,7 +76,25 @@ const middleware = {
       }
       res.redirect('/')
     }
+  },
+
+  usuarioAdminEstaLogado: () => {
+    return function (req, res, next) {
+      if (req.user !== undefined && req.user === 'admin' && req.isAuthenticated()) {
+        return next()
+      }
+      res.redirect('/admin/entrar')
+    }
+  },
+  usuarioAdminNaoEstaLogado: () => {
+    return function (req, res, next) {
+      if (!req.isAuthenticated()) {
+        return next()
+      }
+      res.redirect('/')
+    }
   }
+
 }
 
 module.exports = {
