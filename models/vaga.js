@@ -76,7 +76,7 @@ class Vaga {
       }).first()
   }
 
-  static buscarTodas (transacao = null) {
+  /* static buscarTodas (transacao = null) {
     if (transacao) {
       return transacao('vaga')
         .where({
@@ -87,15 +87,47 @@ class Vaga {
       .where({
         ativo: 1
       })
-  }
+  } */
 
-  static buscarTodasComEmpresa (transacao = null) {
+  static buscarTodas (transacao = null) {
     if (transacao) {
       return transacao('vaga')
-        .join('empresa as EMP', 'EMP.id', '=', 'vaga.id')
+        .select([
+          'vaga.id as id',
+          'vaga.id_empresa as id_empresa',
+          'vaga.cargo',
+          'vaga.tags',
+          'vaga.ativo as vaga_ativo',
+          'vaga.responsabilidades',
+          'vaga.requisitos',
+          'empresa.cnpj as empresa_cnpj',
+          'empresa.nome_fantasia as empresa_nome',
+          'empresa.foto as empresa_foto',
+          'empresa.ativo as empresa_ativo',
+          'empresa.descricao as empresa_descricao'
+        ])
+        .where('vaga.ativo', true)
+        .where('empresa.ativo', true)
+        .join('empresa', 'empresa.id', '=', 'vaga.id_empresa')
     }
     return knex('vaga')
-      .join('empresa as EMP', 'EMP.id', '=', 'vaga.id')
+      .select([
+        'vaga.id as id',
+        'vaga.id_empresa as id_empresa',
+        'vaga.cargo',
+        'vaga.tags',
+        'vaga.ativo as vaga_ativo',
+        'vaga.responsabilidades',
+        'vaga.requisitos',
+        'empresa.cnpj as empresa_cnpj',
+        'empresa.nome_fantasia as empresa_nome',
+        'empresa.foto as empresa_foto',
+        'empresa.ativo as empresa_ativo',
+        'empresa.descricao as empresa_descricao'
+      ])
+      .where('vaga.ativo', 1)
+      .where('empresa.ativo', 1)
+      .join('empresa', 'empresa.id', '=', 'vaga.id_empresa')
   }
 
   // if (transacao) {
