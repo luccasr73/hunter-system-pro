@@ -31,9 +31,17 @@
                         <p><%=vaga.requisitos%></p>
                     </div>
                 </div>
-                <div class="col-12 text-center">
-                    <button class="btn active text-white candidatar" data-id-vaga="<%vaga.id%>" role="button" style="background-color: #cb6ce6;">Candidatar</button>
-                </div>
+                <%if(estaInscrito.length){%>
+                    <div class="col-12 text-center">
+                        <button class="btn active text-white candidatar" data-id-vaga="<%=vaga.id%>" role="button" style="background-color: #cb6ce6;">Candidatar</button>
+                    </div>
+                    <%}%>
+                    <%if(!estaInscrito.length){%>
+                        <div class="col-12 text-center">
+                            Você já se inscreveu para esta vaga!
+                        </div>
+                    <%}%>
+                
 
             </div>
 
@@ -53,9 +61,14 @@
         <script>
             $('.candidatar').on('click', (e)=>{
                let idVaga = $(e.currentTarget).attr('data-id-vaga')
-                axios.post('/vaga/'+idVaga+'/candidatar', data)
+               let data = {
+                id_vaga:idVaga
+               }
+                axios.post('/vaga/candidatar',data)
                         .then(function (res) {
                             console.log(res)
+                            $(e.currentTarget).attr('disabled', true)
+                            $(e.currentTarget).text('Você já se inscreveu!')
                         })
             })
         </script>
