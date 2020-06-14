@@ -43,6 +43,36 @@ class CandidatoVaga {
       }).del()
   }
 
+  static buscarTodasPorCandidato (idCandidato, transacao = null) {
+    if (transacao) {
+      return transacao('candidato_vaga')
+        .where({
+          id_candidato: idCandidato
+        })
+    }
+    return knex('candidato_vaga')
+      .where({
+        id_candidato: idCandidato
+      })
+  }
+
+  static estaInscrito (idVaga, idCandidato, transacao = null) {
+    if (transacao) {
+      return transacao('candidato_vaga')
+        .where({
+          id_vaga: idVaga,
+          id_candidato: idCandidato
+        })
+        .first()
+    }
+    return knex('candidato_vaga')
+      .where({
+        id_vaga: idVaga,
+        id_candidato: idCandidato
+      })
+      .first()
+  }
+
   static buscar (idCandidatoVaga, transacao = null) {
     if (transacao) {
       return transacao('candidato_vaga')
