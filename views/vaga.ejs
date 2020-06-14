@@ -31,16 +31,18 @@
                         <p><%=vaga.requisitos%></p>
                     </div>
                 </div>
-                <%if(estaInscrito.length){%>
-                    <div class="col-12 text-center">
-                        <button class="btn active text-white candidatar" data-id-vaga="<%=vaga.id%>" role="button" style="background-color: #cb6ce6;">Candidatar</button>
-                    </div>
-                    <%}%>
-                    <%if(!estaInscrito.length){%>
+
+                <%if(TemplateUtils.taVazio(estaInscrito)){%>
                         <div class="col-12 text-center">
-                            Você já se inscreveu para esta vaga!
+                            <button class="btn active text-white candidatar" data-id-vaga="<%=vaga.id%>" role="button" style="background-color: #cb6ce6;">Candidatar</button>
                         </div>
-                    <%}%>
+                <%}%>
+
+                <%if(!TemplateUtils.taVazio(estaInscrito)){%>
+                    <div class="col-12 text-center">
+                        Você já se inscreveu para esta vaga!
+                    </div>
+                <%}%>
                 
 
             </div>
