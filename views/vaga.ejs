@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+    <%- include('comum/head', {tituloPagina}) %>
+
+    <body>
+        <%- include('comum/navbar') %>
+        <div class="highlight-blue" style="background-color: #eee;color:#000;">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center"><%=empresa.nome_fantasia%></h2>
+                    <p class="text-center text-body"><%=vaga.cargo%></p>
+                </div>
+                <!-- <div class="buttons">
+                    <a class="btn btn-primary text-body" role="button" href="#">INGLÊS</a>
+                    <a class="btn btn-primary text-body" role="button" href="#">adm</a>
+                    <a class="btn btn-primary text-body" role="button" href="#">wms</a>
+                    <a class="btn btn-primary text-body" role="button" href="#">sap</a>
+                </div> -->
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="text">
+                        <h2>Descrição da empresa</h2>
+                        <p><%=empresa.descricao%></p>
+                        <h2>Atividades e Responsabilidades</h2>
+                        <p><%=vaga.responsabilidades%></p>
+                        <h2>Requisitos</h2>
+                        <p><%=vaga.requisitos%></p>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <button class="btn active text-white candidatar" data-id-vaga="<%vaga.id%>" role="button" style="background-color: #cb6ce6;">Candidatar</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- <div class="map-clean"><iframe allowfullscreen="" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDaEw6o8OhJvRQnTF3gI_tibMejtfasOlY&amp;q=faculdade+impacta&amp;zoom=15" width="100%" height="450"></iframe></div> -->
+        <%- include('comum/footer') %>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/smart-forms.min.js"></script>
+        <script src="/js/script.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js" integrity="sha256-4HOrwHz9ACPZBxAav7mYYlbeMiAL0h6+lZ36cLNpR+E=" crossorigin="anonymous"></script>
+        <script src="/js/utils.js"></script>
+        <script>
+            $('.candidatar').on('click', (e)=>{
+               let idVaga = $(e.currentTarget).attr('data-id-vaga')
+                axios.post('/vaga/'+idVaga+'/candidatar', data)
+                        .then(function (res) {
+                            console.log(res)
+                        })
+            })
+        </script>
+    </body>
+
+</html>
