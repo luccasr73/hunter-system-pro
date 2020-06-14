@@ -3,6 +3,7 @@ const router = express.Router()
 const { passport, middleware } = require('../services/autenticacao')
 const Vaga = require('../models/vaga')
 const Empresa = require('../models/empresa')
+const Template = require('../utils/Template')
 router.get('/', function (req, res, next) {
   const usuario = req.user
   res.render('index', {
@@ -27,12 +28,13 @@ router.get('/vagas', middleware.usuarioEstaLogado(), async function (req, res, n
   const usuario = req.user
   // console.log(req.body)
   // console.log(req.flash('error'))
-  const vagas = await Vaga.buscarTodasComEmpresa()
+  const vagas = await Vaga.buscarTodas()
   console.log(vagas)
   res.render('vagas', {
     tituloPagina: 'Vagas',
     usuario,
-    vagas
+    vagas,
+    TemplateUtils: Template
   })
 })
 
