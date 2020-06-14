@@ -1,0 +1,83 @@
+<div class="modal modal-criar-empresa" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adicionar nova empresa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="cnpj">CNPJ</label>
+                                <input type="text" class="form-control cnpj" name="cnpj">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="nome-fantasia">Nome fantasia</label>
+                                <input type="text" class="form-control nome-fantasia" name="nome_fantasia">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="descricao">Descrição</label>
+                                <textarea class="form-control" id="descricao" rows="3" name="descricao"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="cep">Cep</label>
+                                <input type="text" class="form-control cep" name="cep">
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="form-group">
+                                <label for="logradouro">Logradouro</label>
+                                <input type="text" class="form-control logradouro" name="logradouro">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="numero">Numero</label>
+                                <input type="text" class="form-control numero" name="numero">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" class="form-control bairro" name="bairro">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" class="form-control cidade" name="cidade">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="uf">UF</label>
+                                <input type="text" class="form-control uf" name="uf">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="complemento">Complemento</label>
+                                <input type="text" class="form-control complemento" name="complemento">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary salvar">Salvar</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
