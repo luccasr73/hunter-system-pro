@@ -19,16 +19,16 @@
                         <div class="col-12 col-lg-4 item">
                             <img class="img-fluid" src="images/DANONE_LOGO.png" style="max-width: 338px;">
                             <h3 class="name">
-                                <%=vaga.nome_fantasia%>
+                                <%=vaga.empresa_nome%>
                             </h3>
                             <h4>
                                 <%=vaga.cargo%>
                             </h4>
-                            <a class="btn btn-primary" href="/vaga/<%=vaga.id%>" data-bs-hover-animate="tada" type="button" style="background-color: #cb6ce6;border:solid 1px #cb6ce6">Inscreva-se</a>
+                            <a class="btn btn-primary" href="/vaga/<%=vaga.id%>" style="background-color: #cb6ce6;border:solid 1px #cb6ce6">Inscreva-se</a>
                         </div>
                         <% }) %> 
                 <%}%>
-                <%if(!vagas){%>
+                <%if(!vagas.length){%>
                     <div class="col-12 item">
                         Não foram encontradas vagas no momento
                     </div>
