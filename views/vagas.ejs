@@ -9,34 +9,38 @@
             <div class="container">
                 <div class="intro">
                     <h2 class="text-center" style="height: 59px;width: 501px;padding: 15px;">Vagas</h2>
-                    <p class="lead text-center">Aqui estão algumas das nossas vagas disponiveis.</p>
+                    <p class="lead text-center">Nossas vagas disponiveis</p>
                 </div>
+                <%- //JSON.stringify(vagas) %>
                 <div class="row projects">
-                    <div class="col-sm-6 col-lg-4 item"><img class="img-fluid" src="images/DANONE_LOGO.png" style="width: 338px;">
-                        <h3 class="name">Danone<br></h3>
-                        <h4>Unity C# Game Dev</h4>
-                            <button class="btn btn-primary" data-bs-hover-animate="tada" type="button" style="background-color: #cb6ce6;"><a href="#" style="color: rgb(255,255,255);">Inscreva-se</a></button>
+                   
+                <%if(vagas){%>
+                    <% vagas.forEach(vaga=>{%> 
+                        <div class="col-12 col-lg-4 item">
+                            <img class="img-fluid" src="images/DANONE_LOGO.png" style="max-width: 338px;">
+                            <h3 class="name">
+                                <%=vaga.nome_fantasia%>
+                            </h3>
+                            <h4>
+                                <%=vaga.cargo%>
+                            </h4>
+                            <a class="btn btn-primary" href="/vaga/<%=vaga.id%>" data-bs-hover-animate="tada" type="button" style="background-color: #cb6ce6;border:solid 1px #cb6ce6">Inscreva-se</a>
+                        </div>
+                        <% }) %> 
+                <%}%>
+                <%if(!vagas){%>
+                    <div class="col-12 item">
+                        Não foram encontradas vagas no momento
                     </div>
-                    <div class="col-sm-6 col-lg-4 item">
-                        <img class="img-fluid" src="images/totvs_h_pos_pb.jpg" style="height: 148px;">
-                        <h3 class="name"><strong>TOTVS</strong></h3>
-                        <h4>Unity C# Game Dev</h4>
-                            <button class="btn btn-primary" data-bs-hover-animate="tada" type="button" style="background-color: #cb6ce6;"><a href="#" style="color: rgb(255,255,255);">Inscreva-se</a>
-                            </button>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 item"><img class="img-fluid" src="images/ayof1jjeo8anobq293on.png" style="width: 127px;">
-                        <h3 class="name">AlphaQuest Game Studio<br></h3>
-                        <h4>Unity C# Game Dev</h4>
-                        <button class="btn btn-primary" data-bs-hover-animate="tada" type="button" style="background-color: #cb6ce6;"><a data-bs-hover-animate="tada" href="#" style="color: rgb(255,255,255);">Inscreva-se</a></button>
-                    </div>
+                <%}%>
                 </div>
             </div>
         </div>
         <%- include('comum/footer') %>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/smart-forms.min.js"></script>
-        <script src="assets/js/script.min.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/smart-forms.min.js"></script>
+        <script src="/js/script.min.js"></script>
     </body>
 
 </html>
