@@ -48,14 +48,15 @@ router.get('/vaga/:id', middleware.usuarioEstaLogado(), async function (req, res
   const vaga = await Vaga.buscar(idVaga)
   const empresa = await Empresa.buscar(vaga.id_empresa)
   const candidato = await Candidato.buscarPorIdLogin(usuario.id)
-  const estaInscrito = Vaga.estaInscrito(vaga.id, candidato.id)
-  console.log(vaga)
+  const estaInscrito = await CandidatoVaga.estaInscrito(vaga.id, candidato.id)
+  console.log(estaInscrito)
   res.render('vaga', {
     tituloPagina: 'Vagas',
     usuario,
     empresa,
     vaga,
-    estaInscrito
+    estaInscrito,
+    TemplateUtils: Template
   })
 })
 
