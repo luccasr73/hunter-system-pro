@@ -80,7 +80,7 @@ const middleware = {
 
   usuarioAdminEstaLogado: () => {
     return function (req, res, next) {
-      if (req.user !== undefined && req.user === 'admin' && req.isAuthenticated()) {
+      if (req.user !== undefined && req.user.tipo === 'admin' && req.isAuthenticated()) {
         return next()
       }
       res.redirect('/admin/entrar')
