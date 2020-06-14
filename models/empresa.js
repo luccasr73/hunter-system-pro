@@ -4,7 +4,7 @@ class Empresa {
   static criar (cnpj, nomeFantasia, ativo, descricao, transacao = null) {
     const data = {
       cnpj,
-      nomeFantasia,
+      nome_fantasia: nomeFantasia,
       ativo,
       descricao
     }
@@ -48,6 +48,19 @@ class Empresa {
       }).del()
   }
 
+  static desativar (idEmpresa, transacao = null) {
+    if (transacao) {
+      return transacao('empresa')
+        .where({
+          id: idEmpresa
+        }).update({ ativo: 0 })
+    }
+    return knex('empresa')
+      .where({
+        id: idEmpresa
+      }).update({ ativo: 0 })
+  }
+
   static buscar (idEmpresa, transacao = null) {
     if (transacao) {
       return transacao('empresa')
@@ -59,6 +72,19 @@ class Empresa {
       .where({
         id: idEmpresa
       }).first()
+  }
+
+  static buscarTodas (transacao = null) {
+    if (transacao) {
+      return transacao('empresa')
+        .where({
+          ativo: 1
+        })
+    }
+    return knex('empresa')
+      .where({
+        ativo: 1
+      })
   }
 }
 
