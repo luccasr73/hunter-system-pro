@@ -76,21 +76,6 @@ class Vaga {
       }).first()
   }
 
-  static estaInscrito (idVaga, idCandidato, transacao = null) {
-    if (transacao) {
-      return transacao('vaga')
-        .where({
-          id: idVaga,
-          id_candidato: idCandidato
-        }).first()
-    }
-    return knex('vaga')
-      .where({
-        id: idVaga,
-        id_candidato: idCandidato
-      }).first()
-  }
-
   /* static buscarTodas (transacao = null) {
     if (transacao) {
       return transacao('vaga')
