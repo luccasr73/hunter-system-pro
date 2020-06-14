@@ -1,6 +1,6 @@
 class Template {
   static taVazio (data) {
-    if (data === '' || data === null || data === 'null') {
+    if (data === '' || data === null || data === 'null' || data === undefined) {
       return true
     }
     return false
