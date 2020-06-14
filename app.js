@@ -49,7 +49,7 @@ app.use(logger('tiny'))
 
 app.use('/', rotas.comum)
 app.use('/candidato', rotas.candidato)
-
+app.use('/admin', rotas.admin)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404))
@@ -62,7 +62,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
   // render the error page
-  // console.log(err)
+  console.log(err)
   res.status(err.status || 500)
   res.render('error')
 })
